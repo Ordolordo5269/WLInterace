@@ -160,7 +160,7 @@
     transform: translateY(0);
 }
 
-/* Card icon styling */
+/* Updated card icons with new designs */
 .card-icon {
     width: 65px; /* Ajustado para mejor proporción */
     height: 65px; /* Ajustado para mejor proporción */
@@ -176,6 +176,25 @@
     color: #90CAF9;
     box-shadow: 0 0 30px rgba(144, 202, 249, 0.35);
     transition: all 0.3s ease;
+    background-size: 65% 65% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.mobility-card:nth-child(1) .card-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2390CAF9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z'/%3E%3Cpath d='M12 6v6l4 2'/%3E%3Cpath d='M16 9c1.7 1.3 3 3 3 5'/%3E%3Cpath d='M8 9c-1.7 1.3-3 3-3 5'/%3E%3Cpath d='M7 14c0.3 2.1 1.7 4 3.5 5'/%3E%3Cpath d='M17 14c-0.3 2.1-1.7 4-3.5 5'/%3E%3Cpath d='M12 16l-2 3m2-3l2 3'/%3E%3C/svg%3E");
+}
+
+.mobility-card:nth-child(2) .card-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2390CAF9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12c0-4.4-3.6-8-8-8s-8 3.6-8 8'/%3E%3Cpath d='M3 12h18'/%3E%3Cpath d='M12 16l-4-4m4 4l4-4'/%3E%3Cpath d='M8 5.3c-1.2 1-2.1 2.3-2.6 3.7'/%3E%3Cpath d='M16 5.3c1.2 1 2.1 2.3 2.6 3.7'/%3E%3Ccircle cx='12' cy='12' r='1'/%3E%3Cpath d='M6 20l2-2m8 2l-2-2'/%3E%3Cpath d='M12 17v3'/%3E%3C/svg%3E");
+}
+
+.mobility-card:nth-child(3) .card-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2390CAF9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpath d='M7 14l3-3 2 2 3-3 2 2'/%3E%3Ccircle cx='7' cy='9' r='1'/%3E%3Ccircle cx='12' cy='11' r='1'/%3E%3Ccircle cx='17' cy='9' r='1'/%3E%3Cpath d='M5 18h14'/%3E%3C/svg%3E");
+}
+
+.mobility-card:nth-child(4) .card-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2390CAF9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z'/%3E%3Cpath d='M2.05 11h4'/%3E%3Cpath d='M17.95 11h4'/%3E%3Cpath d='M8 17.5l2-2'/%3E%3Cpath d='M14 17.5l-2-2'/%3E%3Cpath d='M9 6.8l3 2.2'/%3E%3Cpath d='M15 6.8l-3 2.2'/%3E%3C/svg%3E");
 }
 
 /* Icon hover effect */
@@ -525,4 +544,3 @@
         font-size: 1.1rem;
     }
 }
-/* Remove extra closing brace as it has no matching opening brace */

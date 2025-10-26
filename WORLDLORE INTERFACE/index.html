@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorldLore - Global Intelligence Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="holographic.css">
+    <link rel="stylesheet" href="animated-icons.css">
+    <link rel="stylesheet" href="particle-sphere.css">
+    <link rel="stylesheet" href="enhanced-holographic.css">
+    <link rel="stylesheet" href="enhanced-data-blocks.css">
+    <link rel="stylesheet" href="data-visualization.css">
+    <link rel="stylesheet" href="mobility-ai.css">
+    <link rel="stylesheet" href="mobility-cards.css">
+    <link rel="stylesheet" href="mobility-animated-icons.css">
+    <link rel="stylesheet" href="mobility-particles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: radial-gradient(circle at top, #0f172a, #1e293b);
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Smooth scrolling for better UX */
+        }
+
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            color: #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid #334155;
+            will-change: transform, opacity; /* Optimize for animations */
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #38bdf8;
+            text-shadow: 0 0 8px #38bdf8;
+        }
+
+        .try-button {
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: box-shadow 0.2s ease-out, transform 0.2s ease-out; /* Faster transitions */
+        }
+
+        .try-button:hover {
+            box-shadow: 0 0 15px #38bdf8;
+            transform: scale(1.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(to bottom, #0f172a, #1e293b); /* Dark night-blue gradient */
+            color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #1e40af; /* Subtle blue glow */
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            color: #94a3b8;
+        }
+
+        .download-buttons a {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            color: #e2e8f0;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 0.5rem;
+            font-weight: bold;
+            transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+        }
+
+        .download-buttons a:hover {
+            box-shadow: 0 0 10px #38bdf8;
+            transform: scale(1.05);
+        }
+
+        .see-plans-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+        }
+
+        .see-plans-button:hover {
+            box-shadow: 0 0 15px #38bdf8;
+            transform: scale(1.05);
+        }
+
+        /* Remove intelligence dots */
+        #intelligence-dots-container {
+            display: none;
+        }
+
+        .features-section {
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            padding: 5rem 2rem;
+            will-change: transform, opacity; /* Optimize for animations */
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: #38bdf8;
+            text-shadow: 0 0 15px #38bdf8;
+        }
+
+        .feature-card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            padding: 2.5rem;
+            text-align: center;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Reduce animation duration */
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .feature-icon svg {
+            fill: #38bdf8;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px #38bdf8);
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #e2e8f0;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .footer-button {
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: box-shadow 0.2s ease-out, transform 0.2s ease-out; /* Faster transitions */
+            will-change: transform, opacity; /* Optimize for animations */
+        }
+
+        .footer-button:hover {
+            box-shadow: 0 0 20px #38bdf8;
+            transform: scale(1.1);
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #38bdf8;
+            text-shadow: 0 0 10px #38bdf8;
+        }
+
+        .social-link svg {
+            fill: #94a3b8;
+            transition: fill 0.2s ease-out, filter 0.2s ease-out; /* Optimize hover effects */
+        }
+
+        .social-link:hover svg {
+            fill: #38bdf8;
+            filter: drop-shadow(0 0 10px #38bdf8);
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: moveStar 5s linear infinite;
+        }
+
+        @keyframes moveStar {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .mobility-ai-section {
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            padding: 4rem 2rem;
+            color: #e2e8f0;
+            text-align: center;
+        }
+
+        .mobility-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .mobility-video {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+
+        .video-placeholder {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 10px;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: none; /* Eliminado el contenido del pseudo-elemento */
+            display: none; /* Asegurarse de que no se muestre */
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%);
+            }
+        }
+
+        .mobility-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .mobility-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+
+        .mobility-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .mobility-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .mobility-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .mobility-video {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+
+        .video-placeholder {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 10px;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: none; /* Eliminado el contenido del pseudo-elemento */
+            display: none; /* Asegurarse de que no se muestre */
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%);
+            }
+        }
+    </style>
+    <script>
+        // Defer non-critical scripts for better performance
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optimize intelligence dots creation
+            const createIntelligenceDot = () => {
+                const dot = document.createElement('div');
+                dot.className = 'intelligence-dot';
+                dot.style.left = `${Math.random() * 100}%`;
+                dot.style.top = `${Math.random() * 100}%`;
+                return dot;
+            };
+
+            const addIntelligenceDots = () => {
+                const container = document.getElementById('intelligence-dots-container');
+                const numberOfDots = 15;
+
+                for (let i = 0; i < numberOfDots; i++) {
+                    const dot = createIntelligenceDot();
+                    container.appendChild(dot);
+
+                    dot.addEventListener('animationend', () => {
+                        dot.remove();
+                        requestAnimationFrame(() => container.appendChild(createIntelligenceDot()));
+                    });
+                }
+            };
+
+            addIntelligenceDots();
+
+            // Create star particles
+            const createStar = () => {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                return star;
+            };
+
+            const addStars = () => {
+                const container = document.querySelector('.stars');
+                const numberOfStars = 100;
+
+                for (let i = 0; i < numberOfStars; i++) {
+                    const star = createStar();
+                    container.appendChild(star);
+                }
+            };
+
+            addStars();
+        });
+    </script>
+    <script defer src="particles.js"></script> <!-- Defer loading of particles.js -->
+    <script defer src="particle-sphere.js"></script> <!-- Add particle sphere animation -->
+    <script defer src="enhanced-particles.js"></script>
+    <script defer src="mobility-particles.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M12 2L2 19h20L12 2z" fill="currentColor"/>
+            </svg>
+            <span class="logo-text">WorldLore</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link">Features</a>
+                <div class="dropdown-content">
+                    <a href="#">Global Analysis</a>
+                    <a href="#">Real-time Insights</a>
+                    <a href="#">Trend Monitoring</a>
+                </div>
+            </div>
+            <a href="#" class="nav-link">Blog</a>
+            <a href="#" class="nav-link">Sign In</a>
+        </div>
+        <a href="#" class="try-button">Try WorldLore</a>
+    </nav>
+
+    <main class="hero">
+        <div class="stars"></div> <!-- Add star particles container -->
+        <div class="hero-content">
+            <h1>The Smartest Way<br>to Understand the World</h1>
+            <p>Meet WorldLore, your AI assistant for global intelligence. Get real-time insights on countries, migration and world events. Analyze trends, monitor conflicts and explore economies instantly. AI that deciphers the world!</p>
+            <div class="download-buttons">
+                <a href="#" class="play-store-button">
+                    <svg class="store-icon" viewBox="0 0 24 24">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" fill="currentColor"/>
+                    </svg>
+                    <span>Get it on Google Play</span>
+                </a>
+                <a href="#" class="app-store-button">
+                    <svg class="store-icon" viewBox="0 0 24 24">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11" fill="currentColor"/>
+                    </svg>
+                    <span>Download on the App Store</span>
+                </a>
+            </div>
+            <a href="#" class="see-plans-button">See Our Plans</a>
+        </div>
+    </main>
+    
+    <section class="features-section">
+    <h2 class="features-title">Why WorldLore?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <div class="animated-icon ai-brain-icon">
+                    <div class="globe-sphere"></div>
+                    <div class="meridian"></div>
+                    <div class="meridian"></div>
+                    <div class="meridian"></div>
+                    <div class="data-point"></div>
+                    <div class="data-point"></div>
+                    <div class="data-point"></div>
+                    <div class="data-point"></div>
+                    <div class="holo-beam"></div>
+                </div>
+            </div>
+            <h3 class="feature-title">AI-powered insights</h3>
+            <p class="feature-description">Instant access to real-time global intelligence.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <div class="animated-icon realtime-clock-icon">
+                    <div class="clock-face"></div>
+                    <div class="clock-hand hour-hand"></div>
+                    <div class="clock-hand minute-hand"></div>
+                    <div class="data-stream"></div>
+                    <div class="data-stream"></div>
+                    <div class="data-stream"></div>
+                    <div class="data-stream"></div>
+                </div>
+            </div>
+            <h3 class="feature-title">Real-time data</h3>
+            <p class="feature-description">Stay ahead with up-to-date geopolitical trends.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <div class="animated-icon all-in-one-icon">
+                    <div class="grid-container">
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                    </div>
+                    <div class="converge-line"></div>
+                    <div class="converge-line"></div>
+                </div>
+            </div>
+            <h3 class="feature-title">All in one place</h3>
+            <p class="feature-description">Countries, migration, and conflicts - all in one app</p>
+        </div>
+    </div>
+</section>
+
+<section class="process-section">
+    <h2 class="section-title">How WorldLore makes sense of the world</h2>
+    <div class="process-container">
+        <div class="process-step">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Select a country</h3>
+            <p class="step-description">Tap on any country to explore its latest insights</p>
+            <div class="globe-container">
+                <div class="globe">
+                    <div class="globe-dot" id="globe-dot-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="process-step">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Get AI insights</h3>
+            <p class="step-description">Analyze real-time data on economy, politics and conflicts</p>
+            <div class="data-block" id="data-block-1">
+                <div class="data-title">Data information</div>
+                <div class="data-content">
+                    <div class="data-line"></div>
+                    <div class="data-line"></div>
+                    <div class="data-line"></div>
+                    <div class="data-line"></div>
+                </div>
+                <div class="block-label">block 1</div>
+            </div>
+        </div>
+
+        <div class="process-step">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Make smarter decisions</h3>
+            <p class="step-description">Use data-driven intelligence to stay ahead</p>
+            <div class="data-block" id="data-block-2">
+                <div class="data-title">Real-time news</div>
+                <div class="data-content">
+                    <div class="data-line"></div>
+                    <div class="data-line"></div>
+                    <div class="data-line"></div>
+                    <div class="data-line"></div>
+                </div>
+                <div class="block-label">block 2</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="insights-section">
+    <h2 class="section-title">Explore global insights in one tap</h2>
+    <div class="insights-container">
+        <div class="insight-card">
+            <h3 class="insight-title">COUNTRY INFO</h3>
+            <p class="insight-description">Unlock key insights on any country in seconds! Discover real-time data on economic performance, political stability, and migration trends—all in one place. Whether you're a researcher, traveler or strategist, get the information you need at a glance.</p>
+            <div class="insight-visual">
+                <div class="animated-placeholder">IMAGEN ANIMADA O VÍDEO</div>
+            </div>
+        </div>
+
+        <div class="insight-card">
+            <h3 class="insight-title">CONFLICT MAPPER</h3>
+            <p class="insight-description">Stay ahead of global tensions with real-time conflict tracking. From political instability to military conflicts, visualize Crisis zones, monitor live updates, and understand their impact worldwide. Your AI-powered global security dashboard, just a tap away.</p>
+            <div class="insight-visual">
+                <div class="animated-placeholder">IMAGEN ANIMADA O VÍDEO</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mobility-ai-section">
+    <h2 class="section-title">Mobility AI: The Future of Global Mobility</h2>
+    <p class="section-subtitle">Harness the power of AI to redefine the way we understand and shape global mobility.</p>
+    <div class="mobility-grid">
+        <!-- Information Cards in 2x2 Grid (Left side) -->
+        <div class="mobility-cards-container">
+            <div class="mobility-card">
+                <div class="card-icon">
+                    <div class="enhanced-mobility-icon enhanced-migration-icon">
+                        <div class="globe"></div>
+                        <div class="continent"></div>
+                        <div class="continent"></div>
+                        <div class="continent"></div>
+                        <div class="meridian"></div>
+                        <div class="meridian"></div>
+                        <div class="meridian"></div>
+                        <div class="migrant"></div>
+                        <div class="migrant"></div>
+                        <div class="migrant"></div>
+                        <div class="migrant"></div>
+                        <div class="connection-arc"></div>
+                        <div class="connection-arc"></div>
+                        <div class="connection-arc"></div>
+                        <div class="connection-arc"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Dynamic Migration Insights</h3>
+                    <p class="card-description">Gain real-time insights into migration trends and their impact on global mobility.</p>
+                </div>
+            </div>
+            <div class="mobility-card">
+                <div class="card-icon">
+                    <div class="enhanced-mobility-icon enhanced-forecast-icon">
+                        <div class="graph-container">
+                            <div class="graph-base"></div>
+                            <div class="graph-axis"></div>
+                            <div class="graph-point"></div>
+                            <div class="graph-point"></div>
+                            <div class="graph-point"></div>
+                            <div class="graph-point"></div>
+                            <div class="graph-point"></div>
+                            <div class="graph-line"></div>
+                            <div class="prediction-path">
+                                <svg width="100%" height="100%">
+                                    <path d="M5,24 Q10,10 15,14 T25,5" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ai-beam"></div>
+                        <div class="ai-node"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">AI-Powered Mobility Forecasts</h3>
+                    <p class="card-description">Predict future mobility patterns and optimize global strategies with AI.</p>
+                </div>
+            </div>
+            <div class="mobility-card">
+                <div class="card-icon">
+                    <div class="enhanced-mobility-icon enhanced-policy-icon">
+                        <div class="building"></div>
+                        <div class="roof"></div>
+                        <div class="column"></div>
+                        <div class="column"></div>
+                        <div class="column"></div>
+                        <div class="document"></div>
+                        <div class="document"></div>
+                        <div class="document"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Policy Simulation Tools</h3>
+                    <p class="card-description">Evaluate the impact of mobility policies before implementation with advanced simulations.</p>
+                </div>
+            </div>
+            <div class="mobility-card">
+                <div class="card-icon">
+                    <div class="enhanced-mobility-icon enhanced-trends-icon">
+                        <div class="trend-sphere"></div>
+                        <div class="trend-point"></div>
+                        <div class="trend-point"></div>
+                        <div class="trend-point"></div>
+                        <div class="trend-point"></div>
+                        <div class="trend-line"></div>
+                        <div class="trend-line"></div>
+                        <div class="trend-line"></div>
+                        <div class="trend-line"></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Global Mobility Trends</h3>
+                    <p class="card-description">Analyze historical and emerging trends to shape the future of global mobility.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Video Card (Right side) -->
+        <div class="mobility-video">
+            <div class="video-placeholder">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="#38bdf8">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                <p>Experience Mobility AI in Action</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call-to-Action Section -->
+    <div class="cta-container">
+        <a href="#" class="cta-button">Discover More About Mobility AI</a>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-cta">
+            <h2 class="footer-title">Try WorldLore today</h2>
+            <p class="footer-description">Join thousands of analysts, researchers, and decision-makers who rely on WorldLore for global intelligence.</p>
+            <a href="#" class="footer-button">Get Started</a>
+        </div>
+        
+        <div class="footer-links">
+            <div class="footer-column">
+                <h3 class="footer-heading">Product</h3>
+                <ul class="footer-list">
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Documentation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-heading">Company</h3>
+                <ul class="footer-list">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-heading">Legal</h3>
+                <ul class="footer-list">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Data Processing</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" />
+                </svg>
+            </a>
+            <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                </svg>
+            </a>
+            <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+                </svg>
+            </a>
+            <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                </svg>
+            </a>
+            <a href="#" class="social-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+                </svg>
+            </a>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 WorldLore. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+      <script src="enhanced-data-blocks.js"></script>
+</body>
+</html>

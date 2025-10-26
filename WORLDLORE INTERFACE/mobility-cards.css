@@ -1,0 +1,80 @@
+/* Estilos para la organización de tarjetas en la sección Mobility AI */
+
+/* Contenedor principal con estructura mejorada */
+.mobility-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Proporción ajustada: izquierda tarjetas, derecha video */
+    grid-template-areas: "cards video";
+    max-width: 1200px; /* Reducido de 1400px para que se vea más compacto */
+    margin: 0 auto;
+    gap: 1.5rem; /* Reducido de 2rem para un diseño más compacto */
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilo para el contenedor de tarjetas en formato 2x2 */
+.mobility-cards-container {
+    grid-area: cards;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    grid-template-rows: 1fr 1fr; /* Dos filas */
+    gap: 0.8rem; /* Reducido aún más para un diseño más compacto */
+    height: 100%;
+    background: rgba(10, 25, 41, 0.25); /* Fondo más sutil */
+    border-radius: 16px; /* Bordes redondeados reducidos */
+    padding: 1rem; /* Espaciado interno reducido */
+    border: 1px solid rgba(144, 202, 249, 0.08); /* Borde más sutil */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15), 0 0 8px rgba(144, 202, 249, 0.08); /* Sombra más sutil */
+}
+
+/* Ajustes para el video - asegurando que se vea completo */
+.mobility-video {
+    grid-area: video;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 500px; /* Reducido para que se vea completo */
+    max-height: 100%; /* Asegura que no exceda el contenedor */
+}
+
+/* Mejora de las tarjetas individuales - más compactas */
+.mobility-cards-container .mobility-card {
+    margin: 0; /* Elimina márgenes externos */
+    height: auto; /* Altura automática */
+    min-height: 160px; /* Altura mínima aún más reducida */
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease; /* Transición más suave */
+    padding: 1.2rem; /* Padding más reducido */
+    background: rgba(27, 58, 87, 0.3); /* Fondo más sutil */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15), 0 0 8px rgba(144, 202, 249, 0.08); /* Sombra más sutil */
+}
+
+/* Ajustes responsivos */
+@media (max-width: 992px) {
+    .mobility-cards-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobility-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "video"
+            "cards";
+    }
+    
+    .mobility-cards-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+        padding: 1rem;
+    }
+    
+    .mobility-video {
+        min-height: 300px;
+        margin-bottom: 1rem;
+    }
+}

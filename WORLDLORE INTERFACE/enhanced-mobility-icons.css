@@ -1,0 +1,586 @@
+/* Enhanced Mobility Animated Icons - More detailed and representative visual elements */
+
+@keyframes rotateGlobe {
+    0% { transform: translate(-50%, -50%) rotateX(20deg) rotateY(0deg); }
+    100% { transform: translate(-50%, -50%) rotateX(20deg) rotateY(360deg); }
+}
+
+@keyframes continentGlow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes pulseMeridian {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes pulsePoint {
+    0%, 100% { transform: scale(1); opacity: 0.95; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+@keyframes migrationPath {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(10px, -5px) scale(1.2); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes connectionAppear {
+    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes documentFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes graphLineGlow {
+    0%, 100% { opacity: 0.8; filter: brightness(1); }
+    50% { opacity: 1; filter: brightness(1.2); }
+}
+
+/* Common styles for all enhanced mobility icons */
+.enhanced-mobility-icon {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+}
+
+/* 1. Dynamic Migration Insights Icon - Detailed Globe with Migration Routes */
+.enhanced-migration-icon {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    perspective: 800px;
+}
+
+.enhanced-migration-icon .globe {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(25deg) rotateY(0deg);
+    background: radial-gradient(circle at 35% 35%, 
+        rgba(255, 255, 255, 0.9),
+        rgba(56, 189, 248, 0.95) 30%,
+        rgba(14, 165, 233, 0.7) 60%,
+        rgba(2, 132, 199, 0.4));
+    box-shadow: 
+        0 0 25px rgba(56, 189, 248, 0.8),
+        inset 0 0 15px rgba(255, 255, 255, 0.95),
+        inset 5px -5px 15px rgba(14, 165, 233, 0.5);
+    animation: rotateGlobe 25s linear infinite;
+    z-index: 1;
+    backdrop-filter: blur(3px);
+}
+
+.enhanced-migration-icon .continent {
+    position: absolute;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 0.7));
+    border-radius: 40% 60% 70% 50%;
+    z-index: 2;
+    box-shadow: 
+        0 0 12px rgba(255, 255, 255, 0.8),
+        inset 1px 1px 3px rgba(56, 189, 248, 0.3);
+    opacity: 0.9;
+    animation: continentGlow 4s infinite ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.enhanced-migration-icon .continent:nth-child(2) {
+    width: 10px;
+    height: 8px;
+    top: 35%;
+    left: 30%;
+    transform: translate(-50%, -50%) rotateZ(15deg);
+}
+
+.enhanced-migration-icon .continent:nth-child(3) {
+    width: 12px;
+    height: 7px;
+    top: 40%;
+    left: 65%;
+    transform: translate(-50%, -50%) rotateZ(-10deg);
+}
+
+.enhanced-migration-icon .continent:nth-child(4) {
+    width: 8px;
+    height: 10px;
+    top: 65%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotateZ(20deg);
+}
+
+.enhanced-migration-icon .meridian {
+    position: absolute;
+    border: 1px dashed rgba(56, 189, 248, 0.6);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px rgba(56, 189, 248, 0.4);
+    z-index: 2;
+}
+
+.enhanced-migration-icon .meridian:nth-child(5) {
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%) rotateX(60deg);
+    animation: pulseMeridian 4s infinite ease-in-out 0.5s;
+}
+
+.enhanced-migration-icon .meridian:nth-child(6) {
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%) rotateY(60deg);
+    animation: pulseMeridian 4s infinite ease-in-out 1s;
+}
+
+.enhanced-migration-icon .meridian:nth-child(7) {
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%) rotateZ(30deg);
+    animation: pulseMeridian 4s infinite ease-in-out 1.5s;
+}
+
+.enhanced-migration-icon .migrant {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 1),
+        rgba(56, 189, 248, 0.9));
+    border-radius: 50%;
+    filter: blur(0.7px);
+    box-shadow: 
+        0 0 10px rgba(255, 255, 255, 1),
+        0 0 15px rgba(56, 189, 248, 0.9),
+        inset 0 0 3px rgba(14, 165, 233, 0.8);
+    z-index: 3;
+    opacity: 1;
+    transform-style: preserve-3d;
+}
+
+.enhanced-migration-icon .migrant:nth-child(8) {
+    top: 30%;
+    left: 30%;
+    animation: migrationPath 8s infinite linear 0.1s, pulsePoint 2s infinite ease-in-out;
+}
+
+.enhanced-migration-icon .migrant:nth-child(9) {
+    top: 35%;
+    left: 70%;
+    animation: migrationPath 7s infinite linear 2s, pulsePoint 2s infinite ease-in-out 0.3s;
+}
+
+.enhanced-migration-icon .migrant:nth-child(10) {
+    top: 65%;
+    left: 40%;
+    animation: migrationPath 9s infinite linear 1s, pulsePoint 2s infinite ease-in-out 0.7s;
+}
+
+.enhanced-migration-icon .migrant:nth-child(11) {
+    top: 60%;
+    left: 75%;
+    animation: migrationPath 6s infinite linear 3s, pulsePoint 2s infinite ease-in-out 1.1s;
+}
+
+.enhanced-migration-icon .connection-arc {
+    position: absolute;
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    border-top: none;
+    border-left: none;
+    width: 14px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    z-index: 2;
+    opacity: 0;
+    animation: connectionAppear 5s infinite ease-in-out;
+    filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.6));
+}
+
+.enhanced-migration-icon .connection-arc:nth-child(12) {
+    transform: translate(-50%, -50%) rotate(45deg);
+    animation-delay: 0.5s;
+}
+
+.enhanced-migration-icon .connection-arc:nth-child(13) {
+    transform: translate(-50%, -50%) rotate(135deg);
+    animation-delay: 1.5s;
+}
+
+.enhanced-migration-icon .connection-arc:nth-child(14) {
+    transform: translate(-50%, -50%) rotate(225deg);
+    animation-delay: 2.5s;
+}
+
+.enhanced-migration-icon .connection-arc:nth-child(15) {
+    transform: translate(-50%, -50%) rotate(315deg);
+    animation-delay: 3.5s;
+}
+
+/* 2. AI-Powered Mobility Forecasts Icon - Advanced Predictive Graph */
+.enhanced-forecast-icon {
+    position: relative;
+    width: 36px;
+    height: 36px;
+}
+
+.enhanced-forecast-icon .graph-container {
+    position: absolute;
+    width: 30px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: visible;
+}
+
+.enhanced-forecast-icon .graph-base {
+    position: absolute;
+    width: 30px;
+    height: 1px;
+    background: rgba(56, 189, 248, 0.8);
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 5px rgba(56, 189, 248, 0.6);
+}
+
+.enhanced-forecast-icon .graph-axis {
+    position: absolute;
+    width: 1px;
+    height: 24px;
+    background: rgba(56, 189, 248, 0.8);
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 5px rgba(56, 189, 248, 0.6);
+}
+
+.enhanced-forecast-icon .graph-point {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.9), inset 0 0 2px rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    transform-style: preserve-3d;
+}
+
+.enhanced-forecast-icon .graph-point:nth-child(3) {
+    bottom: 0;
+    left: 5px;
+}
+
+.enhanced-forecast-icon .graph-point:nth-child(4) {
+    bottom: 6px;
+    left: 10px;
+    animation: pointPulse 2s infinite ease-in-out 0.2s;
+}
+
+.enhanced-forecast-icon .graph-point:nth-child(5) {
+    bottom: 10px;
+    left: 15px;
+    animation: pointPulse 2s infinite ease-in-out 0.4s;
+}
+
+.enhanced-forecast-icon .graph-point:nth-child(6) {
+    bottom: 8px;
+    left: 20px;
+    animation: pointPulse 2s infinite ease-in-out 0.6s;
+}
+
+.enhanced-forecast-icon .graph-point:nth-child(7) {
+    bottom: 14px;
+    left: 25px;
+    animation: pointPulse 2s infinite ease-in-out 0.8s;
+}
+
+.enhanced-forecast-icon .graph-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.9), rgba(14, 165, 233, 0.6));
+    transform-origin: left center;
+    bottom: 2px;
+    left: 5px;
+    width: 20px;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+    animation: graphLineGlow 3s infinite ease-in-out;
+}
+
+.enhanced-forecast-icon .prediction-path {
+    position: absolute;
+    width: 30px;
+    height: 24px;
+    bottom: 0;
+    left: 0;
+    filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.5));
+}
+
+.enhanced-forecast-icon .prediction-path svg {
+    width: 100%;
+    height: 100%;
+}
+
+.enhanced-forecast-icon .prediction-path path {
+    fill: none;
+    stroke: rgba(56, 189, 248, 0.9);
+    stroke-width: 2px;
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: drawLine 5s infinite ease-in-out;
+    filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.6));
+}
+
+.enhanced-forecast-icon .ai-beam {
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, rgba(56, 189, 248, 0), rgba(56, 189, 248, 0.8), rgba(56, 189, 248, 0));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateZ(0deg);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+    opacity: 0.6;
+    animation: rotateBeam 8s infinite linear;
+}
+
+.enhanced-forecast-icon .ai-node {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(56, 189, 248, 0.9);
+    border-radius: 50%;
+    top: 20%;
+    left: 70%;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+    animation: nodePulse 2s infinite ease-in-out;
+}
+
+/* 3. Policy Simulation Tools Icon - Government Building with Documents */
+.enhanced-policy-icon {
+    position: relative;
+    width: 36px;
+    height: 36px;
+}
+
+.enhanced-policy-icon .building {
+    position: absolute;
+    width: 26px;
+    height: 22px;
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.3), rgba(56, 189, 248, 0.1));
+    border: 1.5px solid rgba(56, 189, 248, 0.9);
+    border-radius: 3px;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), inset 0 0 8px rgba(56, 189, 248, 0.3);
+    z-index: 1;
+    backdrop-filter: blur(1px);
+}
+
+.enhanced-policy-icon .roof {
+    position: absolute;
+    width: 28px;
+    height: 6px;
+    background: rgba(56, 189, 248, 0.4);
+    border: 1px solid rgba(56, 189, 248, 0.8);
+    border-radius: 2px 2px 0 0;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    z-index: 2;
+}
+
+.enhanced-policy-icon .column {
+    position: absolute;
+    height: 20px;
+    width: 5px;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 1),
+        rgba(56, 189, 248, 0.9) 60%,
+        rgba(14, 165, 233, 0.7));
+    bottom: 4px;
+    border-radius: 2px 2px 1px 1px;
+    box-shadow:
+        0 0 10px rgba(56, 189, 248, 0.7),
+        inset 0 0 3px rgba(255, 255, 255, 0.9);
+    z-index: 2;
+    transform-style: preserve-3d;
+    animation: columnGlow 3s infinite ease-in-out;
+}
+
+.enhanced-policy-icon .column:nth-child(3) {
+    left: 30%;
+}
+
+.enhanced-policy-icon .column:nth-child(4) {
+    left: 50%;
+}
+
+.enhanced-policy-icon .column:nth-child(5) {
+    left: 70%;
+}
+
+.enhanced-policy-icon .document {
+    position: absolute;
+    width: 10px;
+    height: 12px;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.9) 70%,
+        rgba(56, 189, 248, 0.2));
+    border: 1px solid rgba(56, 189, 248, 0.9);
+    border-radius: 3px;
+    box-shadow:
+        0 0 12px rgba(56, 189, 248, 0.8),
+        inset 0 0 4px rgba(56, 189, 248, 0.4);
+    z-index: 3;
+    animation: documentFloat 4s infinite ease-in-out;
+    transform-style: preserve-3d;
+    backdrop-filter: blur(1px);
+}
+
+.enhanced-policy-icon .document:nth-child(6) {
+    top: 15%;
+    left: 25%;
+    transform: rotate(-15deg);
+    animation-delay: 0.5s;
+}
+
+.enhanced-policy-icon .document:nth-child(7) {
+    top: 20%;
+    left: 50%;
+    transform: rotate(5deg);
+    animation-delay: 1.5s;
+}
+
+.enhanced-policy-icon .document:nth-child(8) {
+    top: 25%;
+    left: 75%;
+    transform: rotate(-10deg);
+    animation-delay: 2.5s;
+}
+
+/* 4. Global Mobility Trends Icon - World with Data Points */
+.enhanced-trends-icon {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+}
+
+.enhanced-trends-icon .trend-sphere {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(25deg);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%,
+        rgba(255, 255, 255, 0.95),
+        rgba(56, 189, 248, 0.8) 40%,
+        rgba(14, 165, 233, 0.6) 70%,
+        rgba(2, 132, 199, 0.4));
+    box-shadow:
+        0 0 20px rgba(56, 189, 248, 0.7),
+        inset 0 0 15px rgba(255, 255, 255, 0.9);
+    animation: rotateGlobe 20s linear infinite;
+    z-index: 1;
+}
+
+.enhanced-trends-icon .trend-point {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 1),
+        rgba(56, 189, 248, 0.9));
+    border-radius: 50%;
+    box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.9),
+        0 0 15px rgba(56, 189, 248, 0.8);
+    z-index: 2;
+    animation: pointPulse 3s infinite ease-in-out;
+}
+
+.enhanced-trends-icon .trend-point:nth-child(2) {
+    top: 25%;
+    left: 25%;
+    animation-delay: 0.2s;
+}
+
+.enhanced-trends-icon .trend-point:nth-child(3) {
+    top: 30%;
+    left: 75%;
+    animation-delay: 0.7s;
+}
+
+.enhanced-trends-icon .trend-point:nth-child(4) {
+    top: 70%;
+    left: 35%;
+    animation-delay: 1.2s;
+}
+
+.enhanced-trends-icon .trend-point:nth-child(5) {
+    top: 65%;
+    left: 80%;
+    animation-delay: 1.7s;
+}
+
+.enhanced-trends-icon .trend-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg,
+        rgba(56, 189, 248, 0),
+        rgba(56, 189, 248, 0.8) 50%,
+        rgba(56, 189, 248, 0));
+    top: 50%;
+    left: 50%;
+    transform-origin: left center;
+    z-index: 1;
+    animation: graphLineGlow 4s infinite ease-in-out;
+}
+
+.enhanced-trends-icon .trend-line:nth-child(6) {
+    width: 28px;
+    transform: rotate(45deg);
+    animation-delay: 0.5s;
+}
+
+.enhanced-trends-icon .trend-line:nth-child(7) {
+    width: 24px;
+    transform: rotate(135deg);
+    animation-delay: 1.5s;
+}
+
+.enhanced-trends-icon .trend-line:nth-child(8) {
+    width: 26px;
+    transform: rotate(225deg);
+    animation-delay: 2.5s;
+}
+
+.enhanced-trends-icon .trend-line:nth-child(9) {
+    width: 22px;
+    transform: rotate(315deg);
+    animation-delay: 3.5s;
+}

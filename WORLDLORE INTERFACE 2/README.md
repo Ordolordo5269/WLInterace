@@ -29,7 +29,7 @@ npm install
 npm run dev
 ```
 
-El servidor de desarrollo estará disponible en http://localhost:5173/
+El servidor de desarrollo estará disponible en http://localhost:5174/
 
 ## Construcción para producción
 

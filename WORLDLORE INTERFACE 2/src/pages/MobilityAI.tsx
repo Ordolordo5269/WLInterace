@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import SpaceWavesBackground from '../components/SpaceWavesBackground';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -15,9 +14,6 @@ const MobilityAI = () => {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      {/* Background */}
-      <SpaceWavesBackground />
-      
       {/* Navbar */}
       <Navbar />
       

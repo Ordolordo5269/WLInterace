@@ -2,7 +2,6 @@ import { useState, lazy, Suspense, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from './Hero'
 import Navbar from './Navbar'
-import SpaceWavesBackground from './SpaceWavesBackground'
 import LazySection from './LazySection'
 
 // Lazy load heavy components
@@ -34,9 +33,6 @@ function Home() {
 
   return (
     <div className="w-full">
-      {/* Animated Space Waves Background */}
-      <SpaceWavesBackground />
-      
       {/* Navbar */}
       <Navbar />
       

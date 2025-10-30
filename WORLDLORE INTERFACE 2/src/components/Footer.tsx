@@ -1,16 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import SpaceWavesBackground from './SpaceWavesBackground';
 
 const Footer = () => {
   return (
     <div className="relative min-h-[400px] overflow-hidden">
       {/* Divider Line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent z-20"></div>
-      
-      {/* Background */}
-      <SpaceWavesBackground />
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 py-16">

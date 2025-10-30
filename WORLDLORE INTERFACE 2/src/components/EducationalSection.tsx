@@ -7,17 +7,7 @@ import { Environment } from '@react-three/drei';
 import { useSpring, animated } from '@react-spring/three';
 import * as THREE from 'three';
 
-// Vanta.js type declarations
-declare global {
-  interface Window {
-    VANTA: {
-      WAVES: (options: any) => {
-        destroy: () => void;
-        resize: () => void;
-      };
-    };
-  }
-}
+
 
 // Continental Particles Component - Optimized with memo
 const ContinentalParticles = memo(({ inView, phase }: { inView: boolean; phase: number }) => {
@@ -345,98 +335,9 @@ const EducationalSection = () => {
     }
   }), []);
   const ref = useRef(null);
-  const vantaRef = useRef<HTMLDivElement>(null);
-  const vantaEffect = useRef<any>(null);
   const isInView = useInView(ref, { once: true });
 
-  useEffect(() => {
-    // Function to initialize Vanta effect
-    const initVanta = () => {
-      if (vantaRef.current && window.VANTA && typeof window.VANTA.WAVES === 'function') {
-        vantaEffect.current = window.VANTA.WAVES({
-          el: vantaRef.current,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 1.00,
-          scaleMobile: 1.00,
-          color: 0x030d14,
-          shininess: 30.00,
-          waveHeight: 15.00,
-          waveSpeed: 0.75,
-          zoom: 0.65,
-          forceAnimate: true, // Forzar animación
-          fps: 30, // Aumentar FPS
-          material: {
-            options: {
-              fog: true,
-              wireframe: false
-            }
-          }
-        });
-      }
-    };
 
-    // Function to load Vanta.js scripts
-    const loadVantaScripts = () => {
-      // Limpiar scripts anteriores si existen
-      const existingThreeScript = document.querySelector('script[src*="three.min.js"]');
-      const existingVantaScript = document.querySelector('script[src*="vanta.waves.min.js"]');
-      
-      if (existingThreeScript) {
-        existingThreeScript.remove();
-      }
-      
-      if (existingVantaScript) {
-        existingVantaScript.remove();
-      }
-      
-      if (window.VANTA && typeof window.VANTA.WAVES === 'function') {
-        initVanta();
-        return;
-      }
-
-      const threeScript = document.createElement('script');
-      threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
-      threeScript.onload = () => {
-        console.log('Three.js loaded successfully');
-        const vantaScript = document.createElement('script');
-        vantaScript.src = 'https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js';
-        vantaScript.onload = () => {
-          console.log('Vanta WAVES loaded successfully');
-          initVanta();
-        };
-        vantaScript.onerror = (e) => {
-          console.error('Failed to load Vanta WAVES script:', e);
-        };
-        document.head.appendChild(vantaScript);
-      };
-      threeScript.onerror = (e) => {
-        console.error('Failed to load Three.js script:', e);
-      };
-      document.head.appendChild(threeScript);
-    };
-
-    loadVantaScripts();
-
-    const handleResize = () => {
-      if (vantaEffect.current) {
-        vantaEffect.current.resize();
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (vantaEffect.current) {
-        vantaEffect.current.destroy();
-        vantaEffect.current = null;
-      }
-    };
-  }, []);
 
   return (
     <section 
@@ -444,15 +345,6 @@ const EducationalSection = () => {
       className="w-full min-h-screen flex items-center justify-center relative overflow-hidden"
       style={{ willChange: 'transform' }}
     >
-      {/* Vanta Waves Background */}
-      <div
-        ref={vantaRef}
-        className="absolute inset-0 w-full h-full"
-        style={{
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)'
-        }}
-      />
-      
       <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           

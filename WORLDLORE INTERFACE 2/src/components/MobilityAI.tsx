@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from './Navbar'
-import SpaceWavesBackground from './SpaceWavesBackground'
 
 // Lazy load heavy components
 const Footer = lazy(() => import('./Footer'));
@@ -24,9 +23,6 @@ function MobilityAI() {
 
   return (
     <div className="w-full">
-      {/* Animated Space Waves Background */}
-      <SpaceWavesBackground />
-      
       {/* Navbar */}
       <Navbar />
       

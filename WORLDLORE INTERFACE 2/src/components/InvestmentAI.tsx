@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './Navbar'
-import SpaceWavesBackground from './SpaceWavesBackground'
 
 // Lazy load heavy components
 const Footer = lazy(() => import('./Footer'));
@@ -154,8 +153,7 @@ function InvestmentAI() {
 
   return (
     <div className="w-full">
-      {/* Animated Space Waves Background */}
-      <SpaceWavesBackground />
+
       
       {/* Navbar */}
       <Navbar />

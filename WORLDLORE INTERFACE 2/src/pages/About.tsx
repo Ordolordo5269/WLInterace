@@ -39,7 +39,7 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-white text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight leading-[1.1] mb-8">
               Meet the Founders
             </h1>
             
@@ -85,7 +85,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+            <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-[1.1] mb-8">
               Our Vision
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-8" />
@@ -100,11 +100,11 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-                Transforming Global Mobility & Investment
+              <h3 className="text-white text-2xl md:text-3xl font-light tracking-tight leading-[1.1] mb-8">
+                Empowering Global Citizens Through Intelligent Technology
               </h3>
               
-              <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+              <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto mb-6">
                 At WorldLore, we believe in a future where technology removes geographical barriers 
                 and democratizes access to global opportunities. Our vision is to create an intelligent 
                 ecosystem that connects people with the best opportunities for mobility, investment, 
@@ -112,7 +112,7 @@ export default function About() {
                 around the world.
               </p>
               
-              <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+              <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8">
                 Through advanced artificial intelligence and real-time data analysis, we are building 
                 tools that not only inform, but empower individuals and organizations to make smarter, 
                 data-driven decisions about their global future.
@@ -140,55 +140,6 @@ export default function About() {
                 >
                   <span className="text-cyan-300 font-medium">Real-time Data</span>
                 </motion.div>
-              </div>
-            </motion.div>
-
-            {/* Vision Visual */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-2xl p-8 backdrop-blur-sm border border-purple-500/20">
-                {/* Animated background elements */}
-                <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                  <motion.div
-                    className="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/20 rounded-full blur-xl"
-                    animate={{ 
-                      scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.6, 0.3]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  />
-                  <motion.div
-                    className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"
-                    animate={{ 
-                      scale: [1.2, 1, 1.2],
-                      opacity: [0.6, 0.3, 0.6]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity, delay: 2 }}
-                  />
-                </div>
-
-                <div className="relative z-10 text-center">
-                  <motion.div
-                    className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  >
-                    <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </motion.div>
-                  
-                  <p className="text-gray-300 leading-relaxed">
-                    Combinamos tecnología de vanguardia con insights profundos del mercado 
-                    para crear soluciones que realmente marquen la diferencia en la vida 
-                    de las personas.
-                  </p>
-                </div>
               </div>
             </motion.div>
           </div>

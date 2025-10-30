@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SpaceWavesBackground from './SpaceWavesBackground';
 
 const PlatformExperiencesSection = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -77,6 +78,9 @@ const PlatformExperiencesSection = () => {
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden">
+      {/* Space Waves Background */}
+      <SpaceWavesBackground />
+      
       <div className="relative z-10 py-20">
       <div className="max-w-7xl mx-auto px-6">
         

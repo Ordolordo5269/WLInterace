@@ -1,6 +1,9 @@
 import { memo, useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
+import TechGlobe from './TechGlobe';
+import CauseEffectChains from './CauseEffectChains';
+import ScenarioSimulator from './ScenarioSimulator';
+import RobotsGeopolitics from './RobotsGeopolitics';
 
 
 
@@ -20,300 +23,149 @@ const FeatureBadge = memo(({ icon, text, delay }: { icon: string; text: string; 
 
 FeatureBadge.displayName = 'FeatureBadge';
 
-// Advanced 3D Chart Dashboard Component
+// Slide 1 — Live Reasoning Engine (cinematic entry)
 const ChartPlaceholder = memo(() => {
-  const [currentMetric, setCurrentMetric] = useState(0);
-  const metrics = [
-    { name: 'S&P 500', value: '6,090.27', change: '+24.8%', color: '#10b981' },
-    { name: 'NASDAQ', value: '21,053.58', change: '+28.5%', color: '#3b82f6' },
-    { name: 'BTC/USD', value: '$113,746', change: '-1.12%', color: '#ef4444' },
-    { name: 'EUR/USD', value: '1.0520', change: '-4.8%', color: '#ef4444' }
+  const [insightIndex, setInsightIndex] = useState(0);
+  const insights = [
+    'Oil prices fell 6% this week, reducing inflation pressure in Europe.',
+    'Red Sea tensions are increasing delays and costs in global shipping.'
   ];
-
-  const chartData = [
-    { x: 0, y: 120, volume: 0.3 },
-    { x: 50, y: 95, volume: 0.7 },
-    { x: 100, y: 75, volume: 0.5 },
-    { x: 150, y: 60, volume: 0.9 },
-    { x: 200, y: 45, volume: 0.6 },
-    { x: 250, y: 35, volume: 0.8 },
-    { x: 300, y: 25, volume: 0.4 }
-  ];
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMetric((prev) => (prev + 1) % metrics.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [metrics.length]);
+    const id = setInterval(() => setInsightIndex((i) => (i + 1) % insights.length), 4800);
+    return () => clearInterval(id);
+  }, []);
+
+  const hotspots = [
+    { left: '28%', top: '32%', color: 'bg-cyan-400' },
+    { left: '62%', top: '48%', color: 'bg-purple-400' },
+    { left: '46%', top: '68%', color: 'bg-emerald-400' }
+  ];
+
+  // Live analysis overlay state
+  const [stats, setStats] = useState({ signals: 1248, links: 342, anomalies: 7, latency: 58 });
+  const [stream, setStream] = useState<string[]>([
+    'Analyzing Red Sea maritime trade…',
+    'Detected correlation: oil ↓ → inflation ↓ in EU',
+  ]);
+  useEffect(() => {
+    const statsId = setInterval(() => {
+      setStats((s) => ({
+        signals: s.signals + Math.floor(Math.random() * 25) + 10,
+        links: s.links + Math.floor(Math.random() * 6),
+        anomalies: Math.max(0, s.anomalies + (Math.random() < 0.3 ? 1 : 0) - (Math.random() < 0.15 ? 1 : 0)),
+        latency: Math.max(22, Math.min(95, s.latency + (Math.random() - 0.5) * 6))
+      }));
+    }, 900);
+    const streamId = setInterval(() => {
+      const candidates = [
+        'New link: shipping routes ↔ logistics costs',
+        'Emerging signal: copper demand in Asia ↑',
+        'Geopolitical risk: rising tension on eastern border',
+        'Oil price volatility impacting air transport',
+        'Pattern detected: grains ↔ exchange rate',
+      ];
+      setStream((list) => {
+        const next = candidates[Math.floor(Math.random() * candidates.length)];
+        const updated = [next, ...list];
+        return updated.slice(0, 3);
+      });
+    }, 2600);
+    return () => { clearInterval(statsId); clearInterval(streamId); };
+  }, []);
 
   return (
-    <div className="w-full h-full relative">
-      {/* Main Dashboard Container */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-900/30 to-purple-900/40 backdrop-blur-xl border border-white/20 rounded-3xl overflow-hidden">
-        
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-blue-400 rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 2 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Header with Live Metrics */}
-        <div className="relative z-10 p-6">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <h3 className="text-white font-semibold text-lg mb-1">AI Investment Dashboard</h3>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-green-400 text-sm font-medium">Sample Data</span>
-              </div>
+    <div className="w-full h-full text-white">
+      <div className="relative bg-gradient-to-br from-slate-900/70 via-indigo-900/50 to-purple-900/50 rounded-3xl border-2 border-white/20 overflow-hidden shadow-2xl">
+        {/* Header */}
+        <div className="relative z-10 px-6 pt-6 pb-3 border-b border-white/10">
+          <div className="flex items-start justify-between">
+            <div className="text-left">
+              <h3 className="text-2xl font-semibold">World Model AI – Live Global Reasoning</h3>
+              <p className="text-white/70 text-sm mt-1">Real-time reasoning on global events, connections, and emerging risks.</p>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold text-white">$3.2M</div>
-              <div className="text-green-400 text-sm font-semibold">+28.4% YTD</div>
+              <div className="text-xs text-white/60">Model Status</div>
+              <div className="text-sm font-semibold text-emerald-300">Active — updating in real time</div>
             </div>
-          </div>
-
-          {/* Live Metrics Carousel */}
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            {metrics.map((metric, index) => (
-              <motion.div
-                key={index}
-                className={`p-3 rounded-xl border transition-all duration-500 ${
-                  currentMetric === index 
-                    ? 'bg-white/10 border-white/30 shadow-lg' 
-                    : 'bg-white/5 border-white/10'
-                }`}
-                animate={{
-                  scale: currentMetric === index ? 1.05 : 1,
-                  opacity: currentMetric === index ? 1 : 0.7,
-                }}
-              >
-                <div className="text-white/80 text-xs font-medium">{metric.name}</div>
-                <div className="text-white font-bold text-sm">{metric.value}</div>
-                <div 
-                  className="text-xs font-semibold"
-                  style={{ color: metric.color }}
-                >
-                  {metric.change}
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
 
-        {/* Professional Trading Chart */}
-        <div className="relative px-6 pb-6 flex-1">
-          <div className="relative w-full h-40 bg-gradient-to-br from-slate-900/50 to-slate-800/30 rounded-lg border border-white/10 overflow-hidden">
-            {/* Chart Header - Compact */}
-            <div className="absolute top-2 left-4 z-20">
-              <div className="flex items-center gap-2">
-                <div className="text-sm font-semibold text-white/90">Portfolio Performance</div>
-                <span className="text-xs bg-orange-500/20 text-orange-300 px-1.5 py-0.5 rounded border border-orange-400/30">
-                  Example
-                </span>
+        {/* Central Visual */}
+        <div className="relative z-10 p-6">
+          <div className="relative rounded-2xl border border-white/15 bg-white/5 overflow-hidden h-72 flex items-center justify-center">
+            <div className="absolute inset-0">
+              {/* Minimal 3D globe with customizable label */}
+              <TechGlobe labelText="WORLD MODEL AI" />
+            </div>
+            {/* Hotspots removed per design preference */}
+
+            {/* Live analysis overlay */}
+            <div className="absolute inset-0 pointer-events-none select-none opacity-60">
+              {/* HUD superior-izquierda */}
+              <div className="absolute top-3 left-3 text-[11px] text-white/60 font-mono tracking-wide">
+                <div className="flex gap-4">
+                  <div>
+                    <div className="text-white/40">signals</div>
+                    <div className="text-white/80">{stats.signals.toLocaleString()}</div>
+                  </div>
+                  <div>
+                    <div className="text-white/40">links</div>
+                    <div className="text-white/80">{stats.links.toLocaleString()}</div>
+                  </div>
+                  <div>
+                    <div className="text-white/40">anomalies</div>
+                    <div className="text-amber-300/80">{stats.anomalies}</div>
+                  </div>
+                  <div>
+                    <div className="text-white/40">latency</div>
+                    <div className="text-cyan-300/80">{Math.round(stats.latency)} ms</div>
+                  </div>
+                </div>
               </div>
-              <div className="text-xs text-white/40">Last 6 months</div>
-            </div>
-            
 
-            
-            {/* Y-axis Price Scale - Minimal */}
-            <div className="absolute left-0.5 top-12 bottom-8 flex flex-col justify-between text-xs text-white/40">
-              <span>$4k</span>
-              <span>$3.5k</span>
-              <span>$3k</span>
-              <span>$2.5k</span>
-              <span>$2k</span>
-            </div>
-
-            <svg className="w-full h-full relative z-10" viewBox="0 0 500 160">
-              <defs>
-                {/* Clean Gradients */}
-                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#3b82f6" />
-                  <stop offset="100%" stopColor="#60a5fa" />
-                </linearGradient>
-                
-                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.05" />
-                </linearGradient>
-
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-                  <feMerge> 
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* Simplified Grid */}
-              <g className="opacity-15">
-                {[40, 80, 120].map((y, i) => (
-                  <line
-                    key={`h-grid-${i}`}
-                    x1="60"
-                    y1={y}
-                    x2="440"
-                    y2={y}
-                    stroke="#64748b"
-                    strokeWidth="0.5"
-                    strokeDasharray="3,6"
-                  />
+              {/* Stream inferior-izquierda */}
+              <div className="absolute bottom-3 left-3 w-[60%] text-[11px] text-white/70 font-mono">
+                {stream.map((msg, i) => (
+                  <div key={i} className="opacity-80 mb-1">
+                    <span className="inline-block w-1.5 h-1.5 bg-cyan-300/60 rounded-full mr-2 align-middle" />
+                    {msg}
+                  </div>
                 ))}
-              </g>
-
-              {/* Main Portfolio Line - Clean and Smooth */}
-              <motion.path
-                d="M 60 120 Q 120 100, 180 80 Q 240 60, 300 45 Q 360 30, 420 25"
-                stroke="url(#lineGradient)"
-                strokeWidth="3"
-                fill="none"
-                filter="url(#glow)"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2.5, ease: "easeInOut" }}
-              />
-
-              {/* Area Fill under the curve */}
-              <motion.path
-                d="M 60 120 Q 120 100, 180 80 Q 240 60, 300 45 Q 360 30, 420 25 L 420 140 L 60 140 Z"
-                fill="url(#areaGradient)"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.5, delay: 1 }}
-              />
-
-              {/* Key Portfolio Milestones - Only the most important ones */}
-              {[
-                { x: 180, y: 80, value: '$2,890', month: 'Aug' },
-                { x: 300, y: 45, value: '$3,120', month: 'Oct' },
-                { x: 420, y: 25, value: '$3,350', month: 'Dec' }
-              ].map((point, i) => (
-                <motion.g key={`milestone-${i}`}>
-                  <motion.circle
-                    cx={point.x}
-                    cy={point.y}
-                    r="3"
-                    fill="#3b82f6"
-                    stroke="#ffffff"
-                    strokeWidth="2"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.5, delay: 1.5 + i * 0.3 }}
-                  />
-                  <motion.text
-                    x={point.x}
-                    y={point.y - 12}
-                    textAnchor="middle"
-                    className="text-xs font-semibold fill-blue-400"
-                    style={{ fontSize: '11px' }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 2 + i * 0.3 }}
-                  >
-                    {point.value}
-                  </motion.text>
-                </motion.g>
-              ))}
-
-
-
-              {/* AI Prediction Line - Better integrated */}
-              <motion.path
-                d="M 420 25 Q 450 20, 480 18"
-                stroke="#10b981"
-                strokeWidth="2"
-                strokeDasharray="5,3"
-                fill="none"
-                opacity="0.8"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.2, delay: 3 }}
-              />
-              
-              <motion.text
-                x="485"
-                y="15"
-                className="text-xs font-medium fill-emerald-400"
-                style={{ fontSize: '10px' }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 3.5 }}
-              >
-                $3,800
-              </motion.text>
-            </svg>
-            
-            {/* Time labels - Bottom, aligned with chart */}
-            <div className="absolute bottom-1 left-16 right-16">
-              <div className="flex justify-between text-white/50 text-xs">
-                <span>Jul</span>
-                <span>Aug</span>
-                <span>Sep</span>
-                <span>Oct</span>
-                <span>Nov</span>
-                <span>Dec</span>
               </div>
-            </div>
-            
-            {/* Legend - Bottom right, separate */}
-            <div className="absolute bottom-6 right-2">
-              <div className="flex flex-col gap-1 text-xs">
-                <div className="flex items-center gap-1">
-                  <div className="w-2 h-0.5 bg-blue-400 rounded"></div>
-                  <span className="text-white/50">Growth</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <div className="w-2 h-0.5 bg-emerald-400 rounded"></div>
-                  <span className="text-white/50">Forecast</span>
-                </div>
+
+              {/* Etiqueta superior-derecha */}
+              <div className="absolute top-3 right-3 text-[11px] text-white/50 font-mono tracking-wider">
+                Analyzing…
               </div>
             </div>
           </div>
+
+          {/* AI Insight Panel */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={insightIndex}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4 }}
+              className="mt-4 text-sm text-white/90 bg-white/5 border border-white/10 rounded-lg px-4 py-3"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-medium">AI Insight</span>
+              </div>
+              <div className="mt-2">
+                {insights[insightIndex]}
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Bottom Status Bar */}
-        <div className="relative z-10 px-6 pb-4">
-          <div className="flex justify-between items-center text-xs">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                <span className="text-white/60">Price</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                <span className="text-white/60">Trend</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                <span className="text-white/60">AI Prediction</span>
-              </div>
-            </div>
-            <div className="text-white/60">
-              Last updated: <span className="text-white">2s ago</span>
-            </div>
+        {/* Cinematic footer accent */}
+        <div className="relative z-10 px-6 pb-6">
+          <div className="flex items-center justify-center text-[12px] text-white/60">
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mr-2" />
+            Neural world model monitoring signals in real time
           </div>
         </div>
       </div>
@@ -326,13 +178,14 @@ ChartPlaceholder.displayName = 'ChartPlaceholder';
 const InvestmentHeroSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [slideIndex, setSlideIndex] = useState<number>(1);
 
   // Feature badges data
   const features = [
-    { icon: '📈', text: 'Real-time Market Analysis' },
-    { icon: '🤖', text: 'AI-Powered Insights' },
-    { icon: '🌍', text: 'Global Economic Trends' },
-    { icon: '⚡', text: 'Instant Alerts & Signals' }
+    { icon: '🌐', text: 'Global Reasoning Engine' },
+    { icon: '🔄', text: 'Scenario Simulator' },
+    { icon: '🤖', text: 'Robots & Geopolitics' },
+    { icon: '📡', text: 'Real-time World Insights' }
   ];
 
 
@@ -340,11 +193,11 @@ const InvestmentHeroSection = () => {
   return (
     <section 
       ref={ref}
-      className="w-full min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="w-full min-h-screen flex items-start justify-center relative overflow-hidden"
       style={{ willChange: 'transform' }}
     >
       <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           
           {/* Left Column - Investment Content */}
           <motion.div
@@ -370,7 +223,7 @@ const InvestmentHeroSection = () => {
                 scale: { type: "spring", stiffness: 300, damping: 30 }
               }}
             >
-              Understand Global Markets with AI
+              Understand the world. Anticipate change.
             </motion.h1>
             
             {/* Subheadline */}
@@ -381,7 +234,7 @@ const InvestmentHeroSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Meet <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">WorldLore Investment AI</span> — your intelligent guide to stocks, crypto, and global finance.
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">WorldLore World Model AI</span> turns global data into understanding—linking causes and effects, simulating scenarios, and delivering real-time insights.
             </motion.h2>
             
             {/* Description Paragraph */}
@@ -392,7 +245,7 @@ const InvestmentHeroSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Visualize global markets in near real time. From indices and commodities to economic alerts — WorldLore interprets the data for you.
+              World Model AI transforms global data into understanding. It explains why events happen, reveals cause–effect connections between nations, and simulates how the world changes when key variables shift. WorldLore evolves from a global map into a living, reasoning model of the planet.
             </motion.p>
             
             {/* Feature Badges */}
@@ -426,21 +279,39 @@ const InvestmentHeroSection = () => {
                   boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)'
                 }}
               >
-                Explore Investment AI
+                Explore World Model AI
               </button>
             </motion.div>
           </motion.div>
           
           {/* Right Column - Chart Visualization */}
           <motion.div
-            className="flex items-center justify-center relative h-96 lg:h-[500px]"
+            className="relative w-full"
             initial={{ opacity: 0, x: 100, y: 50 }}
             animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: 100, y: 50 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
             style={{ willChange: 'transform, opacity' }}
           >
-            <div className="w-full h-full">
-              <ChartPlaceholder />
+            <div className="w-full min-h-[600px]">
+              {slideIndex === 1 && <ChartPlaceholder />}
+              {slideIndex === 2 && <CauseEffectChains />}
+              {slideIndex === 3 && <ScenarioSimulator />}
+              {slideIndex === 4 && <RobotsGeopolitics />}
+            </div>
+            {/* Back/Next controls below the entire dashboard card */}
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <button
+                onClick={() => setSlideIndex(s => Math.max(1, s - 1))}
+                className={`px-6 py-3 rounded-full border border-white/20 bg-white/5 text-white/90 text-sm hover:bg-white/10 transition ${slideIndex === 1 ? 'opacity-50 pointer-events-none' : ''}`}
+              >
+                Back
+              </button>
+              <button
+                onClick={() => setSlideIndex(s => Math.min(4, s + 1))}
+                className={`px-6 py-3 rounded-full border border-white/20 bg-white/5 text-white/90 text-sm hover:bg-white/10 transition ${slideIndex === 4 ? 'opacity-50 pointer-events-none' : ''}`}
+              >
+                Next
+              </button>
             </div>
           </motion.div>
           

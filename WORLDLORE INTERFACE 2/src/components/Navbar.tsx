@@ -61,7 +61,7 @@ export default function Navbar() {
               onClick={() => handleNavClick('/investment-ai')} 
               className="hover:text-violet-400 transition-colors duration-300 cursor-pointer"
             >
-              Investment AI
+              World Model AI
             </Link>
           </motion.div>
           <motion.div
@@ -144,7 +144,7 @@ export default function Navbar() {
               Mobility AI
             </Link>
             <Link to="/investment-ai" className="hover:text-violet-400 transition-colors duration-300" onClick={() => handleNavClick('/investment-ai') }>
-              Investment AI
+              World Model AI
             </Link>
             <Link to="/about" className="hover:text-violet-400 transition-colors duration-300" onClick={() => handleNavClick('/about')}>
               About

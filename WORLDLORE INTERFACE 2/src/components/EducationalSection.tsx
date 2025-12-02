@@ -23,15 +23,16 @@ const ContinentalParticles = memo(({ inView, phase }: { inView: boolean; phase: 
   const getPhaseParticleConfig = useCallback((phase: number) => {
     switch (phase) {
       case 0:
-        return { maxPoints: 18000, samplingRate: 1, color: '#4ecdc4', size: 0.035 };
+        return { maxPoints: 18000, samplingRate: 1, color: '#4ecdc4', size: 0.06 };
       case 1:
-        return { maxPoints: 20000, samplingRate: 1, color: '#4ecdc4', size: 0.035 };
+        // Softer lilac tone for educational globe
+        return { maxPoints: 20000, samplingRate: 1, color: '#c084fc', size: 0.06 };
       case 2:
-        return { maxPoints: 22000, samplingRate: 1, color: '#4ecdc4', size: 0.035 };
+        return { maxPoints: 22000, samplingRate: 1, color: '#ff6b6b', size: 0.06 };
       case 3:
-        return { maxPoints: 24000, samplingRate: 1, color: '#4ecdc4', size: 0.035 };
+        return { maxPoints: 24000, samplingRate: 1, color: '#4ecdc4', size: 0.06 };
       default:
-        return { maxPoints: 18000, samplingRate: 1, color: '#4ecdc4', size: 0.035 };
+        return { maxPoints: 18000, samplingRate: 1, color: '#4ecdc4', size: 0.06 };
     }
   }, []);
 
@@ -73,6 +74,22 @@ const ContinentalParticles = memo(({ inView, phase }: { inView: boolean; phase: 
     return new Float32Array(points);
   }, [phase]);
 
+  // Fallback particle generator when GeoJSON fails
+  const generateFallbackParticles = useCallback((count: number) => {
+    const pts: number[] = [];
+    const radius = 2.2;
+    for (let i = 0; i < count; i++) {
+      const t = i / count;
+      const lat = Math.acos(1 - 2 * t) - Math.PI / 2;
+      const lon = Math.PI * (1 + Math.sqrt(5)) * i;
+      const x = radius * Math.cos(lat) * Math.cos(lon);
+      const y = radius * Math.sin(lat);
+      const z = radius * Math.cos(lat) * Math.sin(lon);
+      pts.push(x, y, z);
+    }
+    return new Float32Array(pts);
+  }, []);
+
   useEffect(() => {
     let isMounted = true;
     
@@ -81,13 +98,18 @@ const ContinentalParticles = memo(({ inView, phase }: { inView: boolean; phase: 
       .then(data => {
         if (isMounted) {
           const processedParticles = processGeoData(data);
-          setParticles(processedParticles);
+          setParticles(processedParticles && processedParticles.length ? processedParticles : generateFallbackParticles(6000));
         }
       })
-      .catch(error => console.error('Error loading GeoJSON:', error));
+      .catch(error => {
+        console.error('Error loading GeoJSON:', error);
+        if (isMounted) {
+          setParticles(generateFallbackParticles(6000));
+        }
+      });
       
     return () => { isMounted = false; };
-  }, [processGeoData]);
+  }, [processGeoData, generateFallbackParticles]);
 
   useFrame((state) => {
     if (pointsRef.current) {
@@ -145,7 +167,8 @@ const AICoreOrb = memo(({ inView, phase }: { inView: boolean; phase: number }) =
       case 0:
         return { speed: 0.15, intensity: 0.8, color: '#00aaff' };
       case 1:
-        return { speed: 0.25, intensity: 0.9, color: '#8a2be2' };
+        // Softer lilac emissive color for globe
+        return { speed: 0.25, intensity: 0.85, color: '#c084fc' };
       case 2:
         return { speed: 0.35, intensity: 1.0, color: '#ff6b6b' };
       case 3:
@@ -186,12 +209,12 @@ const AICoreOrb = memo(({ inView, phase }: { inView: boolean; phase: number }) =
       <animated.mesh ref={meshRef} position={[0, 0, 0]} geometry={mainSphereGeometry} scale={pulseScale}>
         <meshStandardMaterial
             color="#1a1a2e"
-            roughness={0.3}
-            metalness={0.1}
+            roughness={0.25}
+            metalness={0.12}
             emissive={phaseAnim.color}
-            emissiveIntensity={phaseAnim.intensity}
+            emissiveIntensity={Math.max(1.1, phaseAnim.intensity)}
             transparent
-            opacity={0.08}
+            opacity={0.18}
             depthWrite={false}
           />
       </animated.mesh>
@@ -200,12 +223,12 @@ const AICoreOrb = memo(({ inView, phase }: { inView: boolean; phase: number }) =
         <animated.mesh position={[0, 0, 0]} geometry={mainSphereGeometry} scale={pulseScale}>
           <meshStandardMaterial
               color={phaseAnim.color}
-              roughness={1.0}
+              roughness={0.9}
               metalness={0}
               emissive={phaseAnim.color}
-              emissiveIntensity={0.3}
+              emissiveIntensity={0.45}
               transparent
-              opacity={0.05}
+              opacity={0.1}
               depthWrite={false}
             />
         </animated.mesh>
@@ -220,11 +243,11 @@ const AIScene = memo(({ inView, phase }: { inView: boolean; phase: number }) => 
   // Memoize lights to avoid recreation - Enhanced for better visibility
   const lights = useMemo(() => (
     <>
-      <ambientLight intensity={0.7} />
+      <ambientLight intensity={0.9} />
       <pointLight position={[10, 10, 10]} intensity={1.2} color="#0088ff" />
       <pointLight position={[-10, -10, -10]} intensity={0.8} color="#00aaff" />
-      <pointLight position={[0, 15, 5]} intensity={0.6} color="#ffffff" />
-      <pointLight position={[0, 0, 15]} intensity={0.7} color="#4ecdc4" />
+      <pointLight position={[0, 15, 5]} intensity={0.9} color="#ffffff" />
+      <pointLight position={[0, 0, 15]} intensity={1.0} color="#4ecdc4" />
     </>
   ), []);
 
@@ -233,7 +256,10 @@ const AIScene = memo(({ inView, phase }: { inView: boolean; phase: number }) => 
       {lights}
       <AICoreOrb inView={inView} phase={phase} />
       <ContinentalParticles inView={inView} phase={phase} />
-      <Environment preset="night" />
+      {/* Load environment without blocking other scene elements */}
+      <Suspense fallback={null}>
+        <Environment preset="night" />
+      </Suspense>
     </>
   );
 });
@@ -460,17 +486,15 @@ const EducationalSection = () => {
                 dpr={[1, 1.5]} // Optimized pixel ratio
                 performance={{ min: 0.6 }} // Better performance threshold
                 gl={{ 
-                  antialias: false, 
+                  antialias: true, 
                   alpha: true, 
                   powerPreference: "high-performance",
                   stencil: false,
-                  depth: false
+                  depth: true
                 }}
                 frameloop="always" // Render continuously for better visibility
               >
-                <Suspense fallback={null}>
-                  <MemoizedAIScene inView={true} phase={phase} />
-                </Suspense>
+                <MemoizedAIScene inView={true} phase={phase} />
               </LazyCanvas>
             </div>
           </motion.div>

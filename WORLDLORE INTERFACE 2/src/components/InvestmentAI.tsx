@@ -8,19 +8,18 @@ const Footer = lazy(() => import('./Footer'));
 function InvestmentAI() {
   const [scrollY, setScrollY] = useState(0);
   // Start with just the AI welcome message
+  const initialAiMessage = "Hi, I'm World Model AI. I analyze global systems, explain causal links, and simulate scenarios. Ask anything about countries, sectors, or risks.";
   const [messages, setMessages] = useState([
-    { sender: 'ai', text: 'Hello! I\'m your Investment AI assistant. I can help you analyze global investment opportunities across different markets and asset classes. What would you like to know about?' }
+    { sender: 'ai', text: initialAiMessage }
   ]);
   // Predefined conversation flow
   const conversationFlow = [
-    { sender: 'user', text: 'Where should I invest if I want high yields with medium risk?' },
-    { sender: 'ai', text: 'Our AI detects that Brazil offers high yields in bonds (11.2%) with medium risk, while Germany provides safe Bunds (2.4%). Best suited depending on risk appetite.' },
-    { sender: 'user', text: 'Where should I invest if I want ESG?' },
-    { sender: 'ai', text: 'ESG investments are showing strong performance with Green Bonds up 1.5% and Clean Energy up 2.1%. I recommend allocating 40% to Green Bonds, 30% to ESG Leaders ETFs, and 30% to Clean Energy for a balanced ESG portfolio.' },
-    { sender: 'user', text: 'What about emerging markets? Any opportunities there?' },
-    { sender: 'ai', text: 'Emerging markets offer excellent opportunities right now. India shows strong growth at 6.3%, Vietnam at 5.8% for manufacturing, and Brazil\'s commodities sector is up 4.2%. Consider allocating 35% to India tech and finance, 35% to Southeast Asian manufacturing, and 30% to Latin American commodities for a balanced approach with higher growth potential.' },
-    { sender: 'user', text: 'What are the best opportunities in tech stocks?' },
-    { sender: 'ai', text: 'Here\'s my analysis on tech stocks: The tech sector shows promising growth with AI companies up 3.2%, cloud services up 2.8%, and semiconductor manufacturers up 1.5%. Consider a diversified approach with 40% in established tech giants, 30% in AI-focused companies, and 30% in semiconductor manufacturers.' }
+    { sender: 'user', text: 'How do Red Sea tensions affect global shipping costs?' },
+    { sender: 'ai', text: 'When ships avoid the Suez Canal and go around Africa, trips add about two weeks and roughly 30% more fuel. Freight becomes pricier and deliveries slip, mostly felt in imported goods. The pressure eases as routes normalize.' },
+    { sender: 'user', text: 'Show a cause–effect chain for oil price drops.' },
+    { sender: 'ai', text: 'Brent −$10 lowers diesel about 6% and transport costs around 5%. In the EU that trims headline inflation roughly 0.2pp next quarter, giving households a little more room to spend.' },
+    { sender: 'user', text: 'Which countries gain leverage from robotics adoption?' },
+    { sender: 'ai', text: 'China installs about half of new robots. Korea has roughly 1000 per 10k workers. Early adopters shorten lead times and gain export leverage; late adopters face higher unit costs and weaker bargaining power.' }
   ];
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [inputMessage, setInputMessage] = useState('');
@@ -29,6 +28,7 @@ function InvestmentAI() {
   const [demoComplete, setDemoComplete] = useState(false);
   const [autoSendTimer, setAutoSendTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [typingTimer, setTypingTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+  const [loopTimer, setLoopTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   
   // This function is now only used for the automated demo
@@ -150,6 +150,22 @@ function InvestmentAI() {
     };
   }, [currentMessageIndex, demoComplete]);
 
+  // When the automated conversation completes, restart it after a short pause
+  useEffect(() => {
+    if (!demoComplete) return;
+    const restartDelay = setTimeout(() => {
+      // Reset conversation state and start from the beginning
+      setMessages([{ sender: 'ai', text: initialAiMessage }]);
+      setCurrentMessageIndex(0);
+      setDemoComplete(false);
+    }, 2000); // wait 2 seconds before looping again
+    setLoopTimer(restartDelay);
+    return () => {
+      if (loopTimer) clearTimeout(loopTimer);
+      clearTimeout(restartDelay);
+    };
+  }, [demoComplete]);
+
 
   return (
     <div className="w-full">
@@ -175,7 +191,7 @@ function InvestmentAI() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             >
-              Global Investment Intelligence
+              Understand the world. Anticipate change.
             </motion.h1>
             
             {/* Subheading */}
@@ -185,7 +201,7 @@ function InvestmentAI() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             >
-              AI-powered insights for comparing investment opportunities across countries, markets, and asset classes.
+              WorldLore World Model AI turns global data into understanding—linking causes and effects across nations, simulating scenarios, and delivering real-time insights you can act on.
             </motion.p>
             
             {/* CTA Buttons */}
@@ -199,9 +215,9 @@ function InvestmentAI() {
                 className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25"
                 whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
-                aria-label="Get early access to Investment AI"
+                aria-label="Get early access to World Model AI"
               >
-                Get Early Access
+                Explore World Model AI
               </motion.button>
             </motion.div>
           </motion.div>
@@ -224,33 +240,40 @@ function InvestmentAI() {
               className="order-1"
             >
               <h2 id="investment-story" className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-[1.1] mb-6">
-                Clear Investment Insights Across Global Markets
+                World Model AI transforms global data into understanding
               </h2>
               <p className="text-gray-300 md:text-lg lg:text-xl leading-snug mb-8 max-w-3xl">
-                Investment AI provides a comprehensive view of investment opportunities worldwide. Compare countries, asset classes, and risk profiles to make informed decisions in seconds.
+                It explains why events happen, reveals cause–effect connections between nations, and simulates how the world changes when key variables shift.
               </p>
 
-              {/* Key features */}
+              {/* Key features aligned with homepage */}
               <ul className="grid sm:grid-cols-2 gap-5 max-w-2xl">
                 <li className="flex items-start gap-3">
-                  <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-xl">📊</span>
+                  <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-xl">🌐</span>
                   <div>
-                    <p className="text-white font-medium">Country Investment Profiles</p>
-                    <p className="text-white/70 text-sm">ETFs, indices, top companies, and key economic indicators.</p>
+                    <p className="text-white font-medium">Global Reasoning Engine</p>
+                    <p className="text-white/70 text-sm">Understands, reasons, and predicts how the world works.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-500/20 text-xl">🔄</span>
                   <div>
-                    <p className="text-white font-medium">Dynamic Comparisons</p>
-                    <p className="text-white/70 text-sm">Side-by-side analysis of emerging vs. developed markets.</p>
+                    <p className="text-white font-medium">Scenario Simulator</p>
+                    <p className="text-white/70 text-sm">Simulates changes when key variables shift across systems.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 text-xl">🤖</span>
                   <div>
-                    <p className="text-white font-medium">AI Investment Copilot</p>
-                    <p className="text-white/70 text-sm">Translates complex data into clear, actionable insights.</p>
+                    <p className="text-white font-medium">Robots & Geopolitics</p>
+                    <p className="text-white/70 text-sm">Explores automation, industry, and state power dynamics.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-xl">📡</span>
+                  <div>
+                    <p className="text-white font-medium">Real-time World Insights</p>
+                    <p className="text-white/70 text-sm">Live signals and updates across countries and systems.</p>
                   </div>
                 </li>
               </ul>
@@ -289,7 +312,7 @@ function InvestmentAI() {
         </div>
         <div className="relative max-w-7xl mx-auto">
           {/* Optional accessible heading (visually hidden) */}
-          <h2 id="investment-highlights" className="sr-only">Investment AI Highlights</h2>
+          <h2 id="investment-highlights" className="sr-only">World Model AI Highlights</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Card 1 */}
@@ -302,11 +325,11 @@ function InvestmentAI() {
             >
               <div className="group h-full p-6 md:p-7 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(139,92,246,0.25)] hover:border-violet-400/30 hover:-translate-y-0.5 hover:scale-[1.02] flex flex-col">
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600/20 to-blue-600/20 ring-1 ring-white/10">
-                  <span className="text-2xl" aria-hidden>🌎</span>
+                  <span className="text-2xl" aria-hidden>🌐</span>
                 </div>
-                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-2">Global Asset Overview</h3>
+                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-2">Global Reasoning Engine</h3>
                 <p className="text-gray-300 text-sm md:text-base leading-snug">
-                  Comprehensive view of ETFs, indices, top companies, currencies, bonds, and commodities for each country.
+                  Understands, reasons, and predicts how the world works.
                 </p>
                 <div aria-hidden className="mt-6 h-px w-full bg-gradient-to-r from-violet-400/20 via-blue-400/20 to-transparent" />
               </div>
@@ -322,11 +345,11 @@ function InvestmentAI() {
             >
               <div className="group h-full p-6 md:p-7 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(59,130,246,0.25)] hover:border-blue-400/30 hover:-translate-y-0.5 hover:scale-[1.02] flex flex-col">
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600/20 to-blue-600/20 ring-1 ring-white/10">
-                  <span className="text-2xl" aria-hidden>📈</span>
+                  <span className="text-2xl" aria-hidden>🔄</span>
                 </div>
-                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-2">Risk-Return Analysis</h3>
+                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-2">Scenario Lab</h3>
                 <p className="text-gray-300 text-sm md:text-base leading-snug">
-                  Clear comparison of risk profiles, returns, and economic indicators between emerging and developed markets.
+                  Experiment with variable shifts and compare outcomes across regions.
                 </p>
                 <div aria-hidden className="mt-6 h-px w-full bg-gradient-to-r from-violet-400/20 via-blue-400/20 to-transparent" />
               </div>
@@ -342,11 +365,11 @@ function InvestmentAI() {
             >
               <div className="group h-full p-6 md:p-7 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(14,165,233,0.25)] hover:border-sky-400/30 hover:-translate-y-0.5 hover:scale-[1.02] flex flex-col">
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600/20 to-blue-600/20 ring-1 ring-white/10">
-                  <span className="text-2xl" aria-hidden>🤖</span>
+                  <span className="text-2xl" aria-hidden>📡</span>
                 </div>
-                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-2">AI Investment Advisor</h3>
+                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-2">Live World Signals</h3>
                 <p className="text-gray-300 text-sm md:text-base leading-snug">
-                  Personalized insights that translate complex market data into clear, actionable recommendations.
+                  Live signals and system updates across countries and sectors.
                 </p>
                 <div aria-hidden className="mt-6 h-px w-full bg-gradient-to-r from-violet-400/20 via-blue-400/20 to-transparent" />
               </div>
@@ -367,7 +390,7 @@ function InvestmentAI() {
               transition={{ duration: 0.7, ease: 'easeOut' }}
               viewport={{ once: true, amount: 0.3 }}
             >
-              Interactive Investment Experience
+              Interactive World Model Experience
             </motion.h2>
             <motion.p 
               className="text-gray-300 md:text-lg max-w-3xl mx-auto"
@@ -376,7 +399,7 @@ function InvestmentAI() {
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.05 }}
               viewport={{ once: true, amount: 0.3 }}
             >
-              Chat with our Investment AI to receive personalized insights on global assets. Get real-time analysis and recommendations tailored to your investment goals.
+              Explore connections, risks, and scenarios with World Model AI. Real-time reasoning tailored to your questions.
             </motion.p>
           </div>
           
@@ -392,7 +415,7 @@ function InvestmentAI() {
             >
               <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/90 via-blue-900/30 to-purple-900/40 backdrop-blur-xl overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.3)]">
                 <div className="bg-black/30 p-4 border-b border-white/10">
-                  <h3 className="text-white font-medium">Ask Investment AI</h3>
+                  <h3 className="text-white font-medium">World Model Reasoner</h3>
                 </div>
                 
                 <div ref={chatContainerRef} className="p-4 space-y-4 h-[400px] overflow-y-auto">
@@ -419,7 +442,7 @@ function InvestmentAI() {
                           transition={{ duration: 0.3 }}
                         >
                           <p className="text-white text-sm">{message.text}</p>
-                          {message.sender === 'ai' && <div className="mt-1 text-blue-300 text-xs">Investment AI • Just now</div>}
+                          {message.sender === 'ai' && <div className="mt-1 text-blue-300 text-xs">World Model AI • Just now</div>}
                         </motion.div>
                       </motion.div>
                     ))}
@@ -478,7 +501,7 @@ function InvestmentAI() {
                     >
                       <input 
                         type="text" 
-                        placeholder={demoComplete ? "Demo completed - Chat is now in view-only mode" : "Ask about investment opportunities..."} 
+                        placeholder={demoComplete ? "Demo completed - Chat is now in view-only mode" : "Ask about global connections, risks, or outcomes..."} 
                         className={`w-full bg-black/30 text-white rounded-full py-3 px-5 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-white/10 transition-all duration-300 opacity-50 cursor-not-allowed`}
                         value={inputMessage}
                         onChange={(e) => {}} // Disabled as this is an automatic demo
@@ -514,129 +537,132 @@ function InvestmentAI() {
               className="relative"
             >
               <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm overflow-hidden shadow-2xl p-6">
-                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-4">Global Assets Analysis</h3>
+                <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-4">World Model Signals</h3>
                 
                 {/* Asset cards grid */}
                 <div className="grid grid-cols-2 gap-4">
-                  {/* ETFs / Indices Card */}
+                  {/* Supply Chains Card */}
                   <motion.div 
                     className="bg-gradient-to-br from-blue-900/30 to-blue-950/30 rounded-lg p-4 border border-white/5 hover:border-blue-500/50 transition-all duration-300"
                     whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.3)' }}
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-blue-300 text-sm font-medium">ETFs / Indices</h4>
+                      <h4 className="text-blue-300 text-sm font-medium">Shipping & Delays</h4>
                       <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                         </svg>
                       </div>
                     </div>
-                    <div className="space-y-2">
+                      <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">S&P 500</span>
-                        <span className="text-green-400 text-xs">+1.2%</span>
+                        <span className="text-white/70 text-xs">Asia to Europe delay</span>
+                        <span className="text-red-400 text-xs">+6 days</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">NASDAQ</span>
-                        <span className="text-green-400 text-xs">+0.8%</span>
+                        <span className="text-white/70 text-xs">Ships rerouted via Cape</span>
+                        <span className="text-red-400 text-xs">30%</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">FTSE 100</span>
-                        <span className="text-red-400 text-xs">-0.3%</span>
+                        <span className="text-white/70 text-xs">Rotterdam port throughput</span>
+                        <span className="text-green-400 text-xs">+2.8%</span>
                       </div>
-                    </div>
+                      <p className="text-white/70 text-[11px] mt-2">Why it matters: delays and reroutes raise costs and delivery times.</p>
+                      <p className="text-white/50 text-[10px] mt-2">Days and percent vs typical baseline.</p>
+                      </div>
                   </motion.div>
                   
-                  {/* Bonds Card - Highlighted to show AI is using this data */}
+                  {/* Energy Systems Card - Hover animation consistent with others */}
                    <motion.div 
-                     className="bg-gradient-to-br from-violet-900/30 to-violet-950/30 rounded-lg p-4 border border-violet-500/50 transition-all duration-300"
-                     whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(139, 92, 246, 0.3)' }}
-                     animate={{ 
-                       boxShadow: ['0 0 10px rgba(139, 92, 246, 0.2)', '0 0 20px rgba(139, 92, 246, 0.4)', '0 0 10px rgba(139, 92, 246, 0.2)'],
-                       borderColor: ['rgba(139, 92, 246, 0.3)', 'rgba(139, 92, 246, 0.7)', 'rgba(139, 92, 246, 0.3)']
-                     }}
-                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                     className="bg-gradient-to-br from-violet-900/30 to-violet-950/30 rounded-lg p-4 border border-white/5 hover:border-violet-500/50 transition-all duration-300"
+                     whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(139, 92, 246, 0.35)' }}
                    >
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-violet-300 text-sm font-medium">Bonds</h4>
+                      <h4 className="text-violet-300 text-sm font-medium">Power & Fuel</h4>
                       <div className="w-6 h-6 rounded-full bg-violet-500/20 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
                       </div>
                     </div>
-                    <div className="space-y-2">
+                      <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">Brazil</span>
-                        <span className="text-white/90 text-xs">11.2%</span>
+                        <span className="text-white/70 text-xs">Texas grid stress</span>
+                        <span className="text-white/90 text-xs">0.7 (elevated)</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">Germany</span>
-                        <span className="text-white/90 text-xs">2.4%</span>
+                        <span className="text-white/70 text-xs">Germany renewables share</span>
+                        <span className="text-green-400 text-xs">38%</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">US Treasury</span>
-                        <span className="text-white/90 text-xs">4.1%</span>
+                        <span className="text-white/70 text-xs">Gulf refinery utilization</span>
+                        <span className="text-red-400 text-xs">81%</span>
                       </div>
-                    </div>
+                      <p className="text-white/70 text-[11px] mt-2">Why it matters: grid stress and fuel capacity affect prices and reliability.</p>
+                      <p className="text-white/50 text-[10px] mt-2">Indices normalized 0–1; higher means more stress.</p>
+                      </div>
                   </motion.div>
                   
-                  {/* Currencies Card */}
+                  {/* Geopolitical Risk Card */}
                   <motion.div 
                     className="bg-gradient-to-br from-cyan-900/30 to-cyan-950/30 rounded-lg p-4 border border-white/5 hover:border-cyan-500/50 transition-all duration-300"
                     whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(6, 182, 212, 0.3)' }}
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-cyan-300 text-sm font-medium">Currencies</h4>
+                      <h4 className="text-cyan-300 text-sm font-medium">Conflict & Politics</h4>
                       <div className="w-6 h-6 rounded-full bg-cyan-500/20 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
                     </div>
-                    <div className="space-y-2">
+                      <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">USD/EUR</span>
-                        <span className="text-green-400 text-xs">+0.5%</span>
+                        <span className="text-white/70 text-xs">Red Sea incident rate</span>
+                        <span className="text-red-400 text-xs">+0.3 (higher)</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">USD/JPY</span>
-                        <span className="text-red-400 text-xs">-0.2%</span>
+                        <span className="text-white/70 text-xs">Ukraine truce signals</span>
+                        <span className="text-green-400 text-xs">+0.1 (positive)</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">BTC/USD</span>
-                        <span className="text-green-400 text-xs">+2.3%</span>
+                        <span className="text-white/70 text-xs">LATAM election volatility</span>
+                        <span className="text-red-400 text-xs">+1.5 (high)</span>
                       </div>
-                    </div>
+                      <p className="text-white/70 text-[11px] mt-2">Why it matters: higher risk can disrupt trade and investment plans.</p>
+                      <p className="text-white/50 text-[10px] mt-2">Risk scores vs last month; positive = more activity.</p>
+                      </div>
                   </motion.div>
                   
-                  {/* ESG / Green Bonds Card */}
+                  {/* Climate Signals Card */}
                   <motion.div 
                     className="bg-gradient-to-br from-green-900/30 to-green-950/30 rounded-lg p-4 border border-white/5 hover:border-green-500/50 transition-all duration-300"
                     whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(34, 197, 94, 0.3)' }}
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-green-300 text-sm font-medium">ESG / Green Bonds</h4>
+                      <h4 className="text-green-300 text-sm font-medium">Weather & Clean Energy</h4>
                       <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                         </svg>
                       </div>
                     </div>
-                    <div className="space-y-2">
+                      <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">Green Bonds</span>
-                        <span className="text-green-400 text-xs">+1.5%</span>
+                        <span className="text-white/70 text-xs">SE Brazil heat alerts</span>
+                        <span className="text-red-400 text-xs">+0.6 (more alerts)</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">ESG Leaders</span>
-                        <span className="text-green-400 text-xs">+0.8%</span>
+                        <span className="text-white/70 text-xs">North Italy rain anomaly</span>
+                        <span className="text-green-400 text-xs">+0.3 (wetter)</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/70 text-xs">Clean Energy</span>
-                        <span className="text-green-400 text-xs">+2.1%</span>
+                        <span className="text-white/70 text-xs">Iberia solar momentum</span>
+                        <span className="text-green-400 text-xs">+2.1 (strong)</span>
                       </div>
-                    </div>
+                      <p className="text-white/70 text-[11px] mt-2">Why it matters: extreme weather shifts demand and production; clean energy builds resilience.</p>
+                      <p className="text-white/50 text-[10px] mt-2">Anomaly and momentum vs seasonal norms.</p>
+                      </div>
                   </motion.div>
                 </div>
                 
@@ -645,9 +671,9 @@ function InvestmentAI() {
                   <div className="flex items-start gap-3">
                     <span className="text-xl mt-1">🤖</span>
                     <div>
-                      <h4 className="text-white font-medium mb-1">AI Insight</h4>
+                      <h4 className="text-white font-medium mb-1">World Model Insight</h4>
                       <p className="text-white/80 text-sm">
-                        ESG investments are showing strong performance with Green Bonds up 1.5% and Clean Energy up 2.1%. Consider allocating to these sectors for both impact and returns.
+                        Asia–Europe shipping shows average delays of about 6 days due to Suez reroutes. EU gas storage near 85% cushions demand spikes, and heat alerts cluster in southeast Brazil. Expect slightly slower deliveries and localized price spreads while systems rebalance.
                       </p>
                     </div>
                   </div>
@@ -706,7 +732,7 @@ function InvestmentAI() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             viewport={{ once: true, amount: 0.4 }}
           >
-            Your Investments. Your Future.
+            Understand the World. Make Better Decisions.
           </motion.h2>
 
           <motion.p
@@ -716,7 +742,7 @@ function InvestmentAI() {
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
             viewport={{ once: true, amount: 0.4 }}
           >
-            Investment AI makes global investing smarter, more informed, and more profitable — anywhere in the world.
+            World Model AI clarifies global systems, anticipates outcomes, and helps you reason about complex decisions.
           </motion.p>
 
           <motion.div
@@ -730,9 +756,9 @@ function InvestmentAI() {
               className="inline-flex items-center justify-center rounded-full px-8 py-4 text-base md:text-lg font-semibold text-white bg-gradient-to-r from-violet-600 to-blue-600 shadow-[0_0_30px_rgba(59,130,246,0.35)] hover:shadow-[0_0_45px_rgba(59,130,246,0.55)] transition-all duration-300"
               whileHover={{ scale: 1.05, boxShadow: '0 0 45px rgba(59,130,246,0.55)' }}
               whileTap={{ scale: 0.96 }}
-              aria-label="Start with Investment AI"
+              aria-label="Explore World Model AI"
             >
-              Start with Investment AI
+              Explore World Model AI
             </motion.button>
           </motion.div>
         </div>

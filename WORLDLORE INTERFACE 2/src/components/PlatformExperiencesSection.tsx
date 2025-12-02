@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import SpaceWavesBackground from './SpaceWavesBackground';
+// Removed SpaceWavesBackground to avoid blue waves background flicker
 
 const PlatformExperiencesSection = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -77,9 +77,8 @@ const PlatformExperiencesSection = () => {
   ];
 
   return (
-    <div className="w-full min-h-screen relative overflow-hidden">
-      {/* Space Waves Background */}
-      <SpaceWavesBackground />
+    <div className="w-full min-h-screen relative overflow-hidden bg-black">
+      {/* Background removed: keep a solid black background */}
       
       <div className="relative z-10 py-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -245,7 +244,7 @@ const PlatformExperiencesSection = () => {
                     </div>
                   </motion.div>
 
-                  {/* Account Management Category */}
+                  {/* World Model AI Category (replaced from Investment Intelligence) */}
                   <motion.div
                     className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-white/10"
                     initial={{ opacity: 0, y: 20 }}
@@ -253,19 +252,22 @@ const PlatformExperiencesSection = () => {
                     transition={{ delay: 0.4 }}
                   >
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                      <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="12" cy="12" r="9" />
+                          <path d="M3 12h18" />
+                          <path d="M12 3a15 15 0 0 1 0 18" />
+                          <path d="M12 3a15 15 0 0 0 0 18" />
                         </svg>
                       </div>
-                      <h4 className="text-xl font-semibold text-white">Investment Intelligence</h4>
+                      <h4 className="text-xl font-semibold text-white">World Model AI</h4>
                     </div>
                     <div className="space-y-3">
                       <p className="text-[15px] text-white/90 leading-snug font-medium">
-                        • Visual dashboard of market trends and AI-predicted opportunities
+                        • Live global reasoning: connections, risks, and emerging signals
                       </p>
                       <p className="text-[15px] text-white/90 leading-snug font-medium">
-                        • Personalized investment suggestions based on your profile
+                        • Simulates cause–effect chains to forecast outcomes
                       </p>
                     </div>
                   </motion.div>
@@ -297,97 +299,11 @@ const PlatformExperiencesSection = () => {
                       <div className="w-16"></div>
                     </div>
                     
-                    {/* Browser Content */}
-                    <div className="h-full bg-gradient-to-br from-slate-900 via-gray-900 to-purple-900 relative overflow-hidden">
-                      {/* Header */}
-                      <div className="p-4 border-b border-white/10">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <motion.div
-                              className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center"
-                              animate={{ rotate: [0, 5, -5, 0] }}
-                              transition={{ duration: 3, repeat: Infinity }}
-                            >
-                              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                              </svg>
-                            </motion.div>
-                            <div>
-                              <h4 className="text-white text-sm font-semibold">WorldLore</h4>
-                              <p className="text-white/60 text-xs">Global Intelligence Platform</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <motion.div
-                              className="w-2 h-2 bg-green-400 rounded-full"
-                              animate={{ opacity: [1, 0.3, 1] }}
-                              transition={{ duration: 1.5, repeat: Infinity }}
-                            />
-                            <span className="text-green-400 text-xs">Live</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Main Dashboard */}
-                      <div className="p-4 grid grid-cols-3 gap-3 h-full">
-                        {/* Left Column - Interactive Globe */}
-                        <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg p-3 border border-cyan-400/30">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="w-4 h-4 bg-cyan-400 rounded-full"></div>
-                            <span className="text-white text-xs font-medium">Interactive Globe</span>
-                          </div>
-                          <div className="h-16 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded border border-cyan-400/20 relative overflow-hidden">
-                            <motion.div
-                              className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
-                              animate={{ x: [-20, 80] }}
-                              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                            />
-                          </div>
-                        </div>
-                        
-                        {/* Middle Column - Dynamic Panel */}
-                        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg p-3 border border-purple-400/30">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="w-4 h-4 bg-purple-400 rounded-full"></div>
-                            <span className="text-white text-xs font-medium">Dynamic Panel</span>
-                          </div>
-                          <div className="space-y-1">
-                            <div className="h-1.5 bg-purple-400/40 rounded w-full"></div>
-                            <div className="h-1.5 bg-purple-400/40 rounded w-3/4"></div>
-                            <div className="h-1.5 bg-purple-400/40 rounded w-1/2"></div>
-                            <div className="h-1.5 bg-purple-400/40 rounded w-5/6"></div>
-                          </div>
-                        </div>
-                        
-                        {/* Right Column - AI Premium */}
-                        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg p-3 border border-green-400/30">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="w-4 h-4 bg-green-400 rounded-full"></div>
-                            <span className="text-white text-xs font-medium">AI Premium</span>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-1">
-                              <motion.div
-                                className="w-1.5 h-1.5 bg-green-400 rounded-full"
-                                animate={{ opacity: [1, 0.3, 1] }}
-                                transition={{ duration: 1, repeat: Infinity }}
-                              />
-                              <span className="text-green-400 text-xs">AI Active</span>
-                            </div>
-                            <div className="bg-green-400/20 rounded p-1">
-                              <div className="text-green-300 text-xs">Chat Available</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Bottom Status Bar */}
-                      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gray-800/80 border-t border-white/10 flex items-center px-4 justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-                          <span className="text-cyan-400 text-xs">Real-time Data</span>
-                        </div>
-                        <div className="text-white/60 text-xs">Connected to 195 countries</div>
+                    {/* Browser Content - simplified to pure black placeholder */}
+                    <div className="h-full bg-black relative overflow-hidden">
+                      {/* Placeholder simple to indicate WIP */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-white/50 text-sm tracking-wider">Loading…</span>
                       </div>
                     </div>
                   </div>
@@ -460,18 +376,10 @@ const PlatformExperiencesSection = () => {
                     
                     {/* App Content - Coming Soon Placeholder */}
                     <div className="px-5 py-3 h-full flex flex-col">
-                      {/* Status Bar */}
-                      <div className="flex justify-between items-center px-1 py-2 text-white text-xs">
-                        <span>9:41</span>
-                        <div className="flex gap-1">
-                          <div className="w-3 h-1.5 bg-white rounded-sm"></div>
-                        </div>
-                      </div>
-                      
-                      {/* Coming Soon Content */}
-                      <div className="flex-1 relative bg-gradient-to-br from-gray-900/50 to-black/50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
+                      {/* Contenido minimal */}
+                      <div className="flex-1 bg-black rounded-lg overflow-hidden flex items-center justify-center">
                         {/* Animated background elements */}
-                        <div className="absolute inset-0">
+                        <div className="hidden">
                           {/* Floating particles */}
                           <motion.div
                             className="absolute top-8 left-8 w-1 h-1 bg-cyan-400 rounded-full"
@@ -515,76 +423,13 @@ const PlatformExperiencesSection = () => {
                           </div>
                         </div>
                         
-                        {/* Main Content */}
+                        {/* Placeholder simple */}
                         <div className="relative z-10 text-center px-4">
-                          {/* WorldLore Logo */}
-                          <motion.div
-                            className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-400/20"
-                            animate={{ 
-                              scale: [1, 1.05, 1],
-                              boxShadow: [
-                                "0 10px 25px rgba(34, 211, 238, 0.2)",
-                                "0 10px 25px rgba(34, 211, 238, 0.4)",
-                                "0 10px 25px rgba(34, 211, 238, 0.2)"
-                              ]
-                            }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          >
-                            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                          </motion.div>
-                          
-                          {/* Coming Soon Text */}
-                          <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                          >
-                            <h3 className="text-white text-lg font-light mb-2 leading-tight">
-                              <span className="text-cyan-400 font-medium">WorldLore</span>
-                            </h3>
-                            <h4 className="text-white text-sm font-light mb-1">Mobile Experience</h4>
-                            <motion.p 
-                              className="text-cyan-400 text-xs font-medium tracking-wider"
-                              animate={{ opacity: [0.7, 1, 0.7] }}
-                              transition={{ duration: 2, repeat: Infinity }}
-                            >
-                              COMING SOON
-                            </motion.p>
-                          </motion.div>
-                          
-                          {/* Loading indicator */}
-                          <motion.div 
-                            className="flex justify-center mt-6 gap-1"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                          >
-                            <motion.div
-                              className="w-1.5 h-1.5 bg-cyan-400 rounded-full"
-                              animate={{ scale: [1, 1.2, 1] }}
-                              transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-                            />
-                            <motion.div
-                              className="w-1.5 h-1.5 bg-cyan-400 rounded-full"
-                              animate={{ scale: [1, 1.2, 1] }}
-                              transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                            />
-                            <motion.div
-                              className="w-1.5 h-1.5 bg-cyan-400 rounded-full"
-                              animate={{ scale: [1, 1.2, 1] }}
-                              transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                            />
-                          </motion.div>
+                          <span className="text-white/70 text-xs tracking-wider animate-pulse">Loading…</span>
                         </div>
                         
-                        {/* Bottom accent line */}
-                        <motion.div 
-                          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-                          animate={{ opacity: [0.3, 0.8, 0.3] }}
-                          transition={{ duration: 3, repeat: Infinity }}
-                        />
+                        {/* Accents ocultos */}
+                        <div className="hidden" />
                       </div>
                     </div>
                   </div>
@@ -623,15 +468,14 @@ const PlatformExperiencesSection = () => {
                       <div className="flex justify-between items-center px-2 py-3 text-white text-sm">
                         <span>9:41</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-green-400 text-xs">● Online</span>
                           <div className="w-4 h-2 bg-white rounded-sm"></div>
                         </div>
                       </div>
                       
-                      {/* Coming Soon Content */}
-                      <div className="flex-1 relative bg-gradient-to-br from-gray-900/50 to-black/50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
+                      {/* Contenido minimal */}
+                      <div className="flex-1 bg-black rounded-lg overflow-hidden flex items-center justify-center">
                         {/* Enhanced animated background elements */}
-                        <div className="absolute inset-0">
+                        <div className="hidden">
                           {/* Floating particles - more for iPad */}
                           <motion.div
                             className="absolute top-12 left-16 w-1.5 h-1.5 bg-cyan-400 rounded-full"
@@ -699,92 +543,9 @@ const PlatformExperiencesSection = () => {
                           <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-cyan-400/30 rounded-br-lg"></div>
                         </div>
                         
-                        {/* Main Content */}
+                        {/* Placeholder simple */}
                         <div className="relative z-10 text-center px-8">
-                          {/* WorldLore Logo - Larger for iPad */}
-                          <motion.div
-                            className="w-24 h-24 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-cyan-400/30"
-                            animate={{ 
-                              scale: [1, 1.05, 1],
-                              boxShadow: [
-                                "0 20px 40px rgba(34, 211, 238, 0.3)",
-                                "0 20px 40px rgba(34, 211, 238, 0.5)",
-                                "0 20px 40px rgba(34, 211, 238, 0.3)"
-                              ]
-                            }}
-                            transition={{ duration: 2.5, repeat: Infinity }}
-                          >
-                            <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                          </motion.div>
-                          
-                          {/* Coming Soon Text - Enhanced for iPad */}
-                          <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                          >
-                            <h3 className="text-white text-3xl font-light mb-3 leading-tight">
-                              <span className="text-cyan-400 font-medium">WorldLore</span>
-                            </h3>
-                            <h4 className="text-white text-xl font-light mb-2">Mobile Experience</h4>
-                            <motion.p 
-                              className="text-cyan-400 text-lg font-medium tracking-widest"
-                              animate={{ opacity: [0.7, 1, 0.7] }}
-                              transition={{ duration: 2, repeat: Infinity }}
-                            >
-                              COMING SOON
-                            </motion.p>
-                          </motion.div>
-                          
-                          {/* Enhanced loading indicator */}
-                          <motion.div 
-                            className="flex justify-center mt-8 gap-2"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                          >
-                            <motion.div
-                              className="w-2 h-2 bg-cyan-400 rounded-full"
-                              animate={{ scale: [1, 1.3, 1] }}
-                              transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
-                            />
-                            <motion.div
-                              className="w-2 h-2 bg-cyan-400 rounded-full"
-                              animate={{ scale: [1, 1.3, 1] }}
-                              transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
-                            />
-                            <motion.div
-                              className="w-2 h-2 bg-cyan-400 rounded-full"
-                              animate={{ scale: [1, 1.3, 1] }}
-                              transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
-                            />
-                            <motion.div
-                              className="w-2 h-2 bg-cyan-400 rounded-full"
-                              animate={{ scale: [1, 1.3, 1] }}
-                              transition={{ duration: 1.2, repeat: Infinity, delay: 0.6 }}
-                            />
-                          </motion.div>
-                          
-                          {/* Additional futuristic element */}
-                          <motion.div 
-                            className="mt-8 text-center"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1 }}
-                          >
-                            <motion.div
-                              className="inline-block px-6 py-2 border border-cyan-400/30 rounded-full bg-cyan-400/10"
-                              animate={{ 
-                                borderColor: ["rgba(34, 211, 238, 0.3)", "rgba(34, 211, 238, 0.6)", "rgba(34, 211, 238, 0.3)"],
-                                backgroundColor: ["rgba(34, 211, 238, 0.1)", "rgba(34, 211, 238, 0.2)", "rgba(34, 211, 238, 0.1)"]
-                              }}
-                              transition={{ duration: 3, repeat: Infinity }}
-                            >
-                              <span className="text-cyan-400 text-sm font-light tracking-wide">Developing the Future</span>
-                            </motion.div>
-                          </motion.div>
+                          <span className="text-white/70 text-sm tracking-wider animate-pulse">Loading…</span>
                         </div>
                         
                         {/* Enhanced bottom accent */}
@@ -883,14 +644,14 @@ const PlatformExperiencesSection = () => {
                   </p>
                   
                   {/* AI Chat Messages Mockup (auto-rotating) */}
-                  <div className="bg-gray-800/50 rounded-xl p-6 space-y-3 max-w-lg overflow-hidden">
+                  <div className="bg-gray-800/50 rounded-xl p-6 space-y-3 max-w-lg overflow-y-auto h-[320px] pb-2 mx-auto">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={`user-1-${currentChatIndex}`}
                         className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm ml-8 shadow-md"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        exit={{ opacity: 0 }}
                         transition={{ duration: 0.35 }}
                       >
                         {chatConversations[currentChatIndex].userMessage}
@@ -903,7 +664,7 @@ const PlatformExperiencesSection = () => {
                         className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg text-sm mr-8 shadow-md"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, delay: 0.08 }}
                       >
                         <div className="flex items-center gap-2 mb-1">
@@ -920,7 +681,7 @@ const PlatformExperiencesSection = () => {
                         className="bg-blue-600 text-white px-4 py:2 py-2 rounded-lg text-sm ml-8 shadow-md"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, delay: 0.15 }}
                       >
                         {chatConversations[currentChatIndex].followUpUser}
@@ -933,7 +694,7 @@ const PlatformExperiencesSection = () => {
                         className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg text-sm mr-8 shadow-md"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, delay: 0.22 }}
                       >
                         <div className="flex items-center gap-2 mb-1">

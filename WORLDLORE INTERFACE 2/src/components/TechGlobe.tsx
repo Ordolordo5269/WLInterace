@@ -1,16 +1,17 @@
-import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import React, { useRef, useMemo, useCallback } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface ParticleSphereProps {
   count?: number;
+  mouseRef?: React.MutableRefObject<{ x: number; y: number }>;
 }
 
 // Componente principal de la esfera de partículas futurista
-function ParticleSphere({ count = 15000 }: ParticleSphereProps) {
+function ParticleSphere({ count = 15000, mouseRef }: ParticleSphereProps) {
   const pointsRef = useRef<THREE.Points>(null);
-  const { mouse } = useThree();
+  const smoothedMouse = useRef({ x: 0, y: 0 });
   
   // Generar posiciones de partículas en forma esférica
   const { positions, originalPositions } = useMemo(() => {
@@ -47,15 +48,23 @@ function ParticleSphere({ count = 15000 }: ParticleSphereProps) {
     
     const time = state.clock.elapsedTime;
     const positionAttribute = pointsRef.current.geometry.attributes.position;
+    const lerpFactor = 0.25;
+    const targetX = mouseRef ? mouseRef.current.x : 0;
+    const targetY = mouseRef ? mouseRef.current.y : 0;
+    smoothedMouse.current.x += (targetX - smoothedMouse.current.x) * lerpFactor;
+    smoothedMouse.current.y += (targetY - smoothedMouse.current.y) * lerpFactor;
     
     // Rotación suave de la esfera
     pointsRef.current.rotation.y = time * 0.1;
     pointsRef.current.rotation.x = Math.sin(time * 0.05) * 0.1;
     
     // Respuesta al mouse
-    const mouseInfluence = 0.3;
-    pointsRef.current.rotation.y += mouse.x * mouseInfluence * 0.01;
-    pointsRef.current.rotation.x += mouse.y * mouseInfluence * 0.01;
+    const mouseInfluence = 1.1;
+    pointsRef.current.rotation.y += smoothedMouse.current.x * mouseInfluence * 0.06;
+    pointsRef.current.rotation.x += smoothedMouse.current.y * mouseInfluence * 0.06;
+    // Parallax sutil del conjunto
+    pointsRef.current.position.x = smoothedMouse.current.x * 0.45;
+    pointsRef.current.position.y = smoothedMouse.current.y * 0.32;
     
     // Animación de pulsación y ondas sinusoidales
     if (positionAttribute && positionAttribute.array instanceof Float32Array) {
@@ -78,10 +87,14 @@ function ParticleSphere({ count = 15000 }: ParticleSphereProps) {
         // Efecto de onda sinusoidal
         const wave = Math.sin(time * 3 + distance * 0.8 + originalY * 0.5) * 0.2;
         
-        // Aplicar transformaciones
-        positions[i3] = originalX * pulsation + wave * 0.3;
-        positions[i3 + 1] = originalY * pulsation + wave * 0.2;
-        positions[i3 + 2] = originalZ * pulsation + wave * 0.3;
+        // Aplicar transformaciones + flujo sutil por cursor
+        const nx = originalX / (distance || 1);
+        const ny = originalY / (distance || 1);
+        const nz = originalZ / (distance || 1);
+        const flow = 0.2;
+        positions[i3] = originalX * pulsation + wave * 0.3 + smoothedMouse.current.x * flow * ny;
+        positions[i3 + 1] = originalY * pulsation + wave * 0.2 + smoothedMouse.current.y * flow * nx;
+        positions[i3 + 2] = originalZ * pulsation + wave * 0.3 + (smoothedMouse.current.x - smoothedMouse.current.y) * flow * nz * 0.5;
       }
       
       positionAttribute.needsUpdate = true;
@@ -92,11 +105,11 @@ function ParticleSphere({ count = 15000 }: ParticleSphereProps) {
     <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#00d4ff"
-        size={0.08}
+        color="#6be8ff"
+        size={0.1}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.25}
+        opacity={0.42}
         blending={THREE.AdditiveBlending}
       />
     </Points>
@@ -146,10 +159,31 @@ function AccentParticles() {
 }
 
 // Componente principal TechGlobe
-const TechGlobe: React.FC = () => {
+interface TechGlobeProps {
+  labelText?: string;
+}
+
+const TechGlobe: React.FC<TechGlobeProps> = ({ labelText = 'WORLDLORE NEURAL INTERFACE' }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mouseRefInternal = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    mouseRefInternal.current = { x: nx, y: ny };
+  }, []);
+  const handleMouseLeave = useCallback(() => {
+    mouseRefInternal.current = { x: 0, y: 0 };
+  }, []);
   
   return (
-    <div className="w-full h-full relative">
+    <div
+      className="w-full h-full relative"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       <Canvas
         camera={{
           position: [0, 0, 12],
@@ -181,7 +215,7 @@ const TechGlobe: React.FC = () => {
         />
         
         {/* Esfera principal de partículas */}
-        <ParticleSphere count={3000} />
+        <ParticleSphere count={3000} mouseRef={mouseRefInternal} />
         
         {/* Partículas de acento */}
         <AccentParticles />
@@ -191,10 +225,10 @@ const TechGlobe: React.FC = () => {
       </Canvas>
       
       {/* Overlay de información minimalista */}
-      <div className="absolute bottom-4 right-4 text-white/50 text-xs font-mono tracking-wider">
+      <div className="absolute bottom-4 right-4 text-white/50 text-xs font-mono tracking-wider pointer-events-none">
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-          <span>WORLDLORE NEURAL INTERFACE</span>
+          <span>{labelText}</span>
         </div>
       </div>
     </div>

@@ -112,12 +112,11 @@ const Hero = memo(() => {
           ref={textRef}
           id="dynamic-text"
           className="text-lg md:text-xl lg:text-2xl text-white mb-10 max-w-3xl font-normal tracking-wide leading-relaxed"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
+          initial={false}
           style={{
             textShadow: '0 0 20px rgba(0, 0, 0, 0.8), 0 2px 20px rgba(0, 0, 0, 0.9)',
-            color: '#f0f8ff'
+            color: '#f0f8ff',
+            willChange: 'opacity'
           }}
         >
           The Smartest Way To Understand The World
@@ -125,12 +124,10 @@ const Hero = memo(() => {
         
         <motion.button 
           className="px-10 py-4 bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 text-white text-lg font-semibold rounded-lg shadow-2xl border border-purple-500/30 relative overflow-hidden transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-purple-600"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
+          initial={false}
           style={{
             boxShadow: '0 8px 25px rgba(147, 51, 234, 0.4), 0 0 15px rgba(59, 130, 246, 0.2)',
-            transition: 'all 0.3s ease-in-out'
+            willChange: 'transform'
           }}
           whileHover={{ 
             scale: 1.05,
@@ -142,7 +139,8 @@ const Hero = memo(() => {
           <motion.div
             className="absolute inset-0 opacity-0"
             style={{
-              background: 'linear-gradient(90deg, #00ffe0, #8f00ff)'
+              background: 'linear-gradient(90deg, #00ffe0, #8f00ff)',
+              pointerEvents: 'none'
             }}
             whileHover={{ opacity: 1 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}

@@ -299,11 +299,97 @@ const PlatformExperiencesSection = () => {
                       <div className="w-16"></div>
                     </div>
                     
-                    {/* Browser Content - simplified to pure black placeholder */}
-                    <div className="h-full bg-black relative overflow-hidden">
-                      {/* Placeholder simple to indicate WIP */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-white/50 text-sm tracking-wider">Loading…</span>
+                    {/* Browser Content */}
+                    <div className="h-full bg-gradient-to-br from-slate-900 via-gray-900 to-purple-900 relative overflow-hidden">
+                      {/* Header */}
+                      <div className="p-4 border-b border-white/10">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <motion.div
+                              className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center"
+                              animate={{ rotate: [0, 5, -5, 0] }}
+                              transition={{ duration: 3, repeat: Infinity }}
+                            >
+                              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                              </svg>
+                            </motion.div>
+                            <div>
+                              <h4 className="text-white text-sm font-semibold">WorldLore</h4>
+                              <p className="text-white/60 text-xs">Global Intelligence Platform</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <motion.div
+                              className="w-2 h-2 bg-green-400 rounded-full"
+                              animate={{ opacity: [1, 0.3, 1] }}
+                              transition={{ duration: 1.5, repeat: Infinity }}
+                            />
+                            <span className="text-green-400 text-xs">Live</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Main Dashboard */}
+                      <div className="p-4 grid grid-cols-3 gap-3 h-full">
+                        {/* Left Column - Interactive Globe */}
+                        <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg p-3 border border-cyan-400/30">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-4 h-4 bg-cyan-400 rounded-full"></div>
+                            <span className="text-white text-xs font-medium">Interactive Globe</span>
+                          </div>
+                          <div className="h-16 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded border border-cyan-400/20 relative overflow-hidden">
+                            <motion.div
+                              className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
+                              animate={{ x: [-20, 80] }}
+                              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                            />
+                          </div>
+                        </div>
+                        
+                        {/* Middle Column - Dynamic Panel */}
+                        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg p-3 border border-purple-400/30">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-4 h-4 bg-purple-400 rounded-full"></div>
+                            <span className="text-white text-xs font-medium">Dynamic Panel</span>
+                          </div>
+                          <div className="space-y-1">
+                            <div className="h-1.5 bg-purple-400/40 rounded w-full"></div>
+                            <div className="h-1.5 bg-purple-400/40 rounded w-3/4"></div>
+                            <div className="h-1.5 bg-purple-400/40 rounded w-1/2"></div>
+                            <div className="h-1.5 bg-purple-400/40 rounded w-5/6"></div>
+                          </div>
+                        </div>
+                        
+                        {/* Right Column - AI Premium */}
+                        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg p-3 border border-green-400/30">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-4 h-4 bg-green-400 rounded-full"></div>
+                            <span className="text-white text-xs font-medium">AI Premium</span>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-1">
+                              <motion.div
+                                className="w-1.5 h-1.5 bg-green-400 rounded-full"
+                                animate={{ opacity: [1, 0.3, 1] }}
+                                transition={{ duration: 1, repeat: Infinity }}
+                              />
+                              <span className="text-green-400 text-xs">AI Active</span>
+                            </div>
+                            <div className="bg-green-400/20 rounded p-1">
+                              <div className="text-green-300 text-xs">Chat Available</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Bottom Status Bar */}
+                      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gray-800/80 border-t border-white/10 flex items-center px-4 justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                          <span className="text-cyan-400 text-xs">Real-time Data</span>
+                        </div>
+                        <div className="text-white/60 text-xs">Connected to 195 countries</div>
                       </div>
                     </div>
                   </div>
@@ -334,12 +420,12 @@ const PlatformExperiencesSection = () => {
             className="grid lg:grid-cols-2 gap-12 items-center"
           >
             {/* Devices Mockup */}
-            <div className="relative flex justify-center lg:justify-start gap-8 items-center order-1 lg:order-2">
+            <div className="relative flex justify-center lg:justify-start gap-8 items-center">
               {/* iPhone */}
               <motion.div
                 className="relative"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 {/* Phone Frame with realistic design */}
@@ -378,58 +464,11 @@ const PlatformExperiencesSection = () => {
                     <div className="px-5 py-3 h-full flex flex-col">
                       {/* Contenido minimal */}
                       <div className="flex-1 bg-black rounded-lg overflow-hidden flex items-center justify-center">
-                        {/* Animated background elements */}
-                        <div className="hidden">
-                          {/* Floating particles */}
-                          <motion.div
-                            className="absolute top-8 left-8 w-1 h-1 bg-cyan-400 rounded-full"
-                            animate={{ 
-                              y: [0, -20, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 3, repeat: Infinity, delay: 0 }}
-                          />
-                          <motion.div
-                            className="absolute top-16 right-12 w-1 h-1 bg-blue-400 rounded-full"
-                            animate={{ 
-                              y: [0, -15, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
-                          />
-                          <motion.div
-                            className="absolute bottom-20 left-12 w-1 h-1 bg-cyan-300 rounded-full"
-                            animate={{ 
-                              y: [0, -25, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
-                          />
-                          <motion.div
-                            className="absolute bottom-32 right-8 w-1 h-1 bg-blue-300 rounded-full"
-                            animate={{ 
-                              y: [0, -18, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 2.8, repeat: Infinity, delay: 1.5 }}
-                          />
-                          
-                          {/* Subtle grid lines */}
-                          <div className="absolute inset-0 opacity-10">
-                            <div className="absolute top-1/3 left-0 right-0 h-px bg-cyan-400"></div>
-                            <div className="absolute top-2/3 left-0 right-0 h-px bg-cyan-400"></div>
-                            <div className="absolute top-0 bottom-0 left-1/3 w-px bg-cyan-400"></div>
-                            <div className="absolute top-0 bottom-0 right-1/3 w-px bg-cyan-400"></div>
-                          </div>
-                        </div>
                         
                         {/* Placeholder simple */}
                         <div className="relative z-10 text-center px-4">
-                          <span className="text-white/70 text-xs tracking-wider animate-pulse">Loading…</span>
+                          <span className="text-white/70 text-xs tracking-wider">Loading…</span>
                         </div>
-                        
-                        {/* Accents ocultos */}
-                        <div className="hidden" />
                       </div>
                     </div>
                   </div>
@@ -439,8 +478,8 @@ const PlatformExperiencesSection = () => {
               {/* iPad */}
               <motion.div
                 className="relative"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 {/* iPad Frame with realistic design */}
@@ -474,98 +513,11 @@ const PlatformExperiencesSection = () => {
                       
                       {/* Contenido minimal */}
                       <div className="flex-1 bg-black rounded-lg overflow-hidden flex items-center justify-center">
-                        {/* Enhanced animated background elements */}
-                        <div className="hidden">
-                          {/* Floating particles - more for iPad */}
-                          <motion.div
-                            className="absolute top-12 left-16 w-1.5 h-1.5 bg-cyan-400 rounded-full"
-                            animate={{ 
-                              y: [0, -30, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 4, repeat: Infinity, delay: 0 }}
-                          />
-                          <motion.div
-                            className="absolute top-20 right-20 w-1 h-1 bg-blue-400 rounded-full"
-                            animate={{ 
-                              y: [0, -25, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
-                          />
-                          <motion.div
-                            className="absolute top-32 left-32 w-1 h-1 bg-cyan-300 rounded-full"
-                            animate={{ 
-                              y: [0, -20, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                          />
-                          <motion.div
-                            className="absolute bottom-32 left-20 w-1.5 h-1.5 bg-blue-300 rounded-full"
-                            animate={{ 
-                              y: [0, -35, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 4.5, repeat: Infinity, delay: 1.5 }}
-                          />
-                          <motion.div
-                            className="absolute bottom-40 right-16 w-1 h-1 bg-cyan-400 rounded-full"
-                            animate={{ 
-                              y: [0, -28, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 3.8, repeat: Infinity, delay: 2 }}
-                          />
-                          <motion.div
-                            className="absolute top-40 right-40 w-1 h-1 bg-blue-500 rounded-full"
-                            animate={{ 
-                              y: [0, -22, 0],
-                              opacity: [0.3, 1, 0.3]
-                            }}
-                            transition={{ duration: 3.2, repeat: Infinity, delay: 2.5 }}
-                          />
-                          
-                          {/* Enhanced grid lines */}
-                          <div className="absolute inset-0 opacity-15">
-                            <div className="absolute top-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
-                            <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
-                            <div className="absolute top-3/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
-                            <div className="absolute top-0 bottom-0 left-1/4 w-px bg-gradient-to-b from-transparent via-cyan-400 to-transparent"></div>
-                            <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-transparent via-cyan-400 to-transparent"></div>
-                            <div className="absolute top-0 bottom-0 right-1/4 w-px bg-gradient-to-b from-transparent via-cyan-400 to-transparent"></div>
-                          </div>
-                          
-                          {/* Subtle corner accents */}
-                          <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-cyan-400/30 rounded-tl-lg"></div>
-                          <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-cyan-400/30 rounded-tr-lg"></div>
-                          <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-cyan-400/30 rounded-bl-lg"></div>
-                          <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-cyan-400/30 rounded-br-lg"></div>
-                        </div>
                         
                         {/* Placeholder simple */}
                         <div className="relative z-10 text-center px-8">
-                          <span className="text-white/70 text-sm tracking-wider animate-pulse">Loading…</span>
+                          <span className="text-white/70 text-sm tracking-wider">Loading…</span>
                         </div>
-                        
-                        {/* Enhanced bottom accent */}
-                        <motion.div 
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-                          animate={{ opacity: [0.3, 0.8, 0.3] }}
-                          transition={{ duration: 3, repeat: Infinity }}
-                        />
-                        
-                        {/* Side accents */}
-                        <motion.div 
-                          className="absolute top-0 bottom-0 left-0 w-0.5 bg-gradient-to-b from-transparent via-cyan-400 to-transparent"
-                          animate={{ opacity: [0.2, 0.6, 0.2] }}
-                          transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-                        />
-                        <motion.div 
-                          className="absolute top-0 bottom-0 right-0 w-0.5 bg-gradient-to-b from-transparent via-cyan-400 to-transparent"
-                          animate={{ opacity: [0.2, 0.6, 0.2] }}
-                          transition={{ duration: 4, repeat: Infinity, delay: 2 }}
-                        />
                       </div>
                     </div>
                   </div>
@@ -574,7 +526,7 @@ const PlatformExperiencesSection = () => {
             </div>
 
             {/* Content */}
-            <div className="space-y-8 order-2 lg:order-1 text-center">
+            <div className="space-y-8">
               <div>
                 <motion.h3 
                   className="text-4xl md:text-5xl font-light text-white mb-4 leading-tight"
@@ -596,7 +548,7 @@ const PlatformExperiencesSection = () => {
 
                 {/* Official App Store Buttons */}
                 <motion.div 
-                  className="flex flex-col sm:flex-row gap-3 sm:gap-0.5 justify-center items-center mb-12 mx-auto"
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-0.5 justify-center items-center mb-12"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
@@ -644,13 +596,13 @@ const PlatformExperiencesSection = () => {
                   </p>
                   
                   {/* AI Chat Messages Mockup (auto-rotating) */}
-                  <div className="bg-gray-800/50 rounded-xl p-6 space-y-3 max-w-lg overflow-y-auto h-[320px] pb-2 mx-auto">
+                  <div className="bg-gray-800/50 rounded-xl p-6 space-y-3 max-w-lg h-[350px] overflow-hidden">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={`user-1-${currentChatIndex}`}
                         className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm ml-8 shadow-md"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.35 }}
                       >
@@ -662,8 +614,8 @@ const PlatformExperiencesSection = () => {
                       <motion.div
                         key={`ai-1-${currentChatIndex}`}
                         className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg text-sm mr-8 shadow-md"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, delay: 0.08 }}
                       >
@@ -678,9 +630,9 @@ const PlatformExperiencesSection = () => {
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={`user-2-${currentChatIndex}`}
-                        className="bg-blue-600 text-white px-4 py:2 py-2 rounded-lg text-sm ml-8 shadow-md"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm ml-8 shadow-md"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, delay: 0.15 }}
                       >
@@ -692,13 +644,13 @@ const PlatformExperiencesSection = () => {
                       <motion.div
                         key={`ai-2-${currentChatIndex}`}
                         className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg text-sm mr-8 shadow-md"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.35, delay: 0.22 }}
                       >
                         <div className="flex items-center gap-2 mb-1">
-                          <div className="w-2 h-2 bg-cyan-300 rounded-full animate-pulse"></div>
+                          <div className="w-2 h-2 bg-cyan-300 rounded-full"></div>
                           <span className="text-xs text-cyan-200">WorldLore AI</span>
                         </div>
                         {chatConversations[currentChatIndex].followUpAI}

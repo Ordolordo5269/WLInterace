@@ -28,6 +28,7 @@ interface GeoData {
 
 interface ParticleGlobeProps {
   // Props interface for future extensibility
+  activeCategory?: string | null;
 }
 
 const ParticleGlobe: React.FC<ParticleGlobeProps> = memo(() => {

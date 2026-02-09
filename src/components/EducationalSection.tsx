@@ -382,26 +382,27 @@ const EducationalSection = () => {
             transition={{ duration: 1, ease: "easeOut" }}
             style={{ willChange: 'transform, opacity' }}
           >
-            <AnimatePresence mode="wait">
-              <motion.h2 
-                key={`title-${phase}`}
-                className="text-4xl md:text-5xl lg:text-6xl font-light text-white mb-8 leading-tight"
-                style={{ 
-                  textShadow: '0 0 20px rgba(138, 43, 226, 0.5), 0 0 40px rgba(138, 43, 226, 0.3)',
-                  willChange: 'transform, opacity'
-                }}
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                transition={{ 
-                  duration: 0.7, 
-                  ease: "easeOut",
-                  scale: { type: "spring", stiffness: 300, damping: 30 }
-                }}
-              >
-                {phaseContent[phase as keyof typeof phaseContent]?.title}
-              </motion.h2>
-            </AnimatePresence>
+            <div className="min-h-[240px] mb-8 flex items-end">
+              <AnimatePresence mode="wait">
+                <motion.h2 
+                  key={`title-${phase}`}
+                  className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight w-full"
+                  style={{ 
+                    textShadow: '0 0 20px rgba(138, 43, 226, 0.5), 0 0 40px rgba(138, 43, 226, 0.3)',
+                    willChange: 'transform, opacity'
+                  }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    ease: "easeOut"
+                  }}
+                >
+                  {phaseContent[phase as keyof typeof phaseContent]?.title}
+                </motion.h2>
+              </AnimatePresence>
+            </div>
             
             <motion.div 
               className="space-y-4 text-lg md:text-xl text-white/90 leading-relaxed font-light"
@@ -410,24 +411,24 @@ const EducationalSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={`desc-${phase}`}
-                  className="space-y-4"
-                  style={{ willChange: 'transform, opacity' }}
-                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -15 }}
-                  transition={{ 
-                    duration: 0.6, 
-                    ease: "easeOut", 
-                    delay: 0.3,
-                    scale: { type: "spring", stiffness: 400, damping: 25 }
-                  }}
-                >
-                  {phaseContent[phase as keyof typeof phaseContent]?.content}
-                </motion.div>
-              </AnimatePresence>
+              <div className="relative min-h-[300px]">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={`desc-${phase}`}
+                    className="space-y-4 w-full"
+                    style={{ willChange: 'transform, opacity' }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      ease: "easeOut"
+                    }}
+                  >
+                    {phaseContent[phase as keyof typeof phaseContent]?.content}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
               
               {/* Navigation Buttons */}
               <motion.div 
@@ -436,29 +437,25 @@ const EducationalSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <div className="flex gap-4">
-                  {/* Back Button - Conditionally rendered */}
-                  {phase > 0 && (
-                    <button
-                      onClick={handleBack}
-                      className="px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-light text-lg rounded-full hover:shadow-[0_0_20px_rgba(128,128,128,0.5)] transition-all duration-300"
-                    >
-                      Back
-                    </button>
-                  )}
+                <div className="flex gap-4 items-center">
+                  {/* Back Button - Always rendered to maintain layout, hidden when not needed */}
+                  <button
+                    onClick={handleBack}
+                    disabled={phase === 0}
+                    className={`px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-light text-lg rounded-full hover:shadow-[0_0_20px_rgba(128,128,128,0.5)] transition-all duration-300 ${phase === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                  >
+                    Back
+                  </button>
                   
                   {/* Next Button - Conditionally rendered */}
-                  {phase < totalPhases - 1 && (
+                  {phase < totalPhases - 1 ? (
                     <button
                       onClick={handleNext}
-                      className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-light text-lg rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.7)] transition-all duration-300"
+                      className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-light text-lg rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.7)] transition-all duration-300 w-[140px] flex justify-center"
                     >
                       Next
                     </button>
-                  )}
-                  
-                  {/* Enter WorldLore Button - Conditionally rendered */}
-                  {phase === totalPhases - 1 && (
+                  ) : (
                     <button
                       onClick={handleEnterWorldLore}
                       className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-light text-lg rounded-full hover:shadow-[0_0_20px_rgba(16,185,129,0.7)] transition-all duration-300"

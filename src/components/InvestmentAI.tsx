@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useState, useRef } from 'react'
+import { lazy, Suspense, useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './Navbar'
 
@@ -6,7 +6,7 @@ import Navbar from './Navbar'
 const Footer = lazy(() => import('./Footer'));
 
 function InvestmentAI() {
-  const [scrollY, setScrollY] = useState(0);
+  const [, setScrollY] = useState(0);
   // Start with just the AI welcome message
   const initialAiMessage = "Hi, I'm World Model AI. I analyze global systems, explain causal links, and simulate scenarios. Ask anything about countries, sectors, or risks.";
   const [messages, setMessages] = useState([
@@ -31,14 +31,6 @@ function InvestmentAI() {
   const [loopTimer, setLoopTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   
-  // This function is now only used for the automated demo
-  // It's kept for compatibility but not actively used for manual input
-  const handleSendMessage = () => {
-    // In the automated demo, messages are handled by the useEffect
-    // This function is kept for compatibility with existing code
-    return;
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -288,7 +280,7 @@ function InvestmentAI() {
               className="order-2 lg:order-none"
             >
               <div className="relative mx-auto lg:ml-auto w-full max-w-xl">
-                <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm overflow-hidden shadow-2xl">
+                <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xs overflow-hidden shadow-2xl">
                   {/* Placeholder visual (video-ready) */}
                   <div className="aspect-[16/10] sm:aspect-[4/3] md:aspect-[16/9] w-full grid place-items-center">
                     <div className="text-center p-6">
@@ -429,7 +421,7 @@ function InvestmentAI() {
                         className={`flex items-start mb-4 ${message.sender === 'user' ? 'justify-end' : ''}`}
                       >
                         {message.sender === 'ai' && (
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 flex items-center justify-center mr-3 flex-shrink-0 shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 flex items-center justify-center mr-3 shrink-0 shadow-[0_0_15px_rgba(139,92,246,0.5)]">
                             <span className="text-white text-xs">AI</span>
                           </div>
                         )}
@@ -455,7 +447,7 @@ function InvestmentAI() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                       >
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 flex items-center justify-center mr-3 flex-shrink-0 shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 flex items-center justify-center mr-3 shrink-0 shadow-[0_0_15px_rgba(139,92,246,0.5)]">
                           <span className="text-white text-xs">AI</span>
                         </div>
                         <motion.div 
@@ -502,9 +494,9 @@ function InvestmentAI() {
                       <input 
                         type="text" 
                         placeholder={demoComplete ? "Demo completed - Chat is now in view-only mode" : "Ask about global connections, risks, or outcomes..."} 
-                        className={`w-full bg-black/30 text-white rounded-full py-3 px-5 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-white/10 transition-all duration-300 opacity-50 cursor-not-allowed`}
+                        className={`w-full bg-black/30 text-white rounded-full py-3 px-5 pr-12 focus:outline-hidden focus:ring-2 focus:ring-blue-500 border border-white/10 transition-all duration-300 opacity-50 cursor-not-allowed`}
                         value={inputMessage}
-                        onChange={(e) => {}} // Disabled as this is an automatic demo
+                        onChange={() => {}} // Disabled as this is an automatic demo
                         disabled={true} // Always disabled as this is an automatic demo
                       />
                       <motion.button 
@@ -536,7 +528,7 @@ function InvestmentAI() {
               viewport={{ once: true, amount: 0.3 }}
               className="relative"
             >
-              <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm overflow-hidden shadow-2xl p-6">
+              <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xs overflow-hidden shadow-2xl p-6">
                 <h3 className="text-white text-xl md:text-2xl font-light tracking-tight leading-snug mb-4">World Model Signals</h3>
                 
                 {/* Asset cards grid */}

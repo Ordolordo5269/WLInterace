@@ -10,6 +10,14 @@ const ParticleGlobeWithLegend: React.FC = memo(() => {
       <Canvas
         camera={{ position: [0, 0, 4], fov: 45 }}
         className="w-full h-full"
+        dpr={[1, 2]}
+        gl={{
+          powerPreference: 'high-performance',
+          antialias: false,
+          alpha: true,
+          stencil: false,
+          depth: true,
+        }}
       >
         <ambientLight intensity={0.3} />
         <pointLight position={[10, 10, 10]} intensity={0.8} />

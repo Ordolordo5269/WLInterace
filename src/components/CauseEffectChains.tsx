@@ -173,7 +173,7 @@ const CauseEffectChains = memo(() => {
                   <motion.button
                     key={c.id}
                     onClick={() => setScenario(c.id)}
-                    className={`text-left rounded-xl border ${active ? 'border-white/25 bg-white/10' : 'border-white/10 bg-black/20'} p-2 backdrop-blur-sm hover:bg-white/10 transition transform-gpu h-full min-h-[220px] overflow-hidden flex flex-col`}
+                    className={`text-left rounded-xl border ${active ? 'border-white/25 bg-white/10' : 'border-white/10 bg-black/20'} p-2 backdrop-blur-xs hover:bg-white/10 transition transform-gpu h-full min-h-[220px] overflow-hidden flex flex-col`}
                     initial={false}
                     style={{ willChange: 'opacity, transform' }}
                   >

@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 // Feature Badge Component
 const FeatureBadge = memo(({ icon, text, delay }: { icon: string; text: string; delay: number }) => (
   <motion.div
-    className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 hover:bg-white/10 transition-all duration-300"
+    className="flex items-center gap-3 bg-white/5 backdrop-blur-xs border border-white/10 rounded-xl px-4 py-3 hover:bg-white/10 transition-all duration-300"
     initial={{ opacity: 0, y: 20, scale: 0.9 }}
     animate={{ opacity: 1, y: 0, scale: 1 }}
     transition={{ duration: 0.6, delay, ease: "easeOut" }}
@@ -352,7 +352,7 @@ const MobilityHeroSection = memo(() => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm border border-purple-400/30 rounded-full px-6 py-3">
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-xs border border-purple-400/30 rounded-full px-6 py-3">
             <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
             <span className="text-purple-300 font-medium text-sm">
               🚧 Currently in Development - Join our waitlist for early access

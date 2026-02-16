@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from './Hero'
 import Navbar from './Navbar'
@@ -13,7 +13,6 @@ const PlatformExperiencesSection = lazy(() => import('./PlatformExperiencesSecti
 const Footer = lazy(() => import('./Footer'));
 
 function Home() {
-  const [count, setCount] = useState(0)
   const location = useLocation()
 
   useEffect(() => {

@@ -10,7 +10,7 @@ import RobotsGeopolitics from './RobotsGeopolitics';
 // Feature Badge Component
 const FeatureBadge = memo(({ icon, text, delay }: { icon: string; text: string; delay: number }) => (
   <motion.div
-    className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 hover:bg-white/10 transition-all duration-300"
+    className="flex items-center gap-3 bg-white/5 backdrop-blur-xs border border-white/10 rounded-xl px-4 py-3 hover:bg-white/10 transition-all duration-300"
     initial={{ opacity: 0, y: 20, scale: 0.9 }}
     animate={{ opacity: 1, y: 0, scale: 1 }}
     transition={{ duration: 0.6, delay, ease: "easeOut" }}
@@ -34,12 +34,6 @@ const ChartPlaceholder = memo(() => {
     const id = setInterval(() => setInsightIndex((i) => (i + 1) % insights.length), 4800);
     return () => clearInterval(id);
   }, []);
-
-  const hotspots = [
-    { left: '28%', top: '32%', color: 'bg-cyan-400' },
-    { left: '62%', top: '48%', color: 'bg-purple-400' },
-    { left: '46%', top: '68%', color: 'bg-emerald-400' }
-  ];
 
   // Live analysis overlay state
   const [stats, setStats] = useState({ signals: 1248, links: 342, anomalies: 7, latency: 58 });

@@ -12,6 +12,7 @@ export const useIntersectionObserver = (
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [hasIntersected, setHasIntersected] = useState(false);
   const elementRef = useRef<HTMLElement>(null);
+  const hasIntersectedRef = useRef(false);
 
   const { threshold = 0.1, rootMargin = '50px', triggerOnce = true } = options;
 
@@ -23,23 +24,18 @@ export const useIntersectionObserver = (
       ([entry]) => {
         const isElementIntersecting = entry.isIntersecting;
         setIsIntersecting(isElementIntersecting);
-        
-        if (isElementIntersecting && !hasIntersected) {
+
+        if (isElementIntersecting && !hasIntersectedRef.current) {
+          hasIntersectedRef.current = true;
           setHasIntersected(true);
         }
       },
-      {
-        threshold,
-        rootMargin,
-      }
+      { threshold, rootMargin }
     );
 
     observer.observe(element);
-
-    return () => {
-      observer.unobserve(element);
-    };
-  }, [threshold, rootMargin, hasIntersected]);
+    return () => observer.unobserve(element);
+  }, [threshold, rootMargin]);
 
   return {
     elementRef,

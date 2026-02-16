@@ -1,12 +1,13 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, memo, useCallback, useMemo } from 'react';
 import ParticleGlobeWithLegend from './ParticleGlobeWithLegend';
 
 const Hero = memo(() => {
+  const reduceMotion = useReducedMotion();
   const textRef = useRef<HTMLParagraphElement>(null);
   const intervalRef = useRef<number | null>(null);
   const currentIndexRef = useRef(0);
-  
+
   const phrases = useMemo(() => [
     "The Smartest Way To Understand The World",
     "AI-driven geopolitical intelligence",
@@ -31,35 +32,29 @@ const Hero = memo(() => {
     }, 500);
   }, [phrases]);
 
-  // Inicializar el estilo de transición
+  // Inicializar el estilo de transición (pausar rotación de texto si reduceMotion)
   useEffect(() => {
     if (textRef.current) {
       textRef.current.style.transition = 'opacity 0.5s ease-in-out';
     }
-    
-    // Start animation after initial delay
+    if (reduceMotion) return;
     const startAnimation = () => {
       intervalRef.current = setInterval(animateText, 3000);
     };
-    
     const timer = setTimeout(startAnimation, 3000);
-    
-    // Cleanup
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
       clearTimeout(timer);
     };
-  }, [animateText]);
+  }, [animateText, reduceMotion]);
   
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Globe Background with Events */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={{ opacity: reduceMotion ? 1 : 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: reduceMotion ? 0 : 2 }}
         className="absolute inset-0"
         style={{ 
           willChange: 'opacity',
@@ -83,15 +78,15 @@ const Hero = memo(() => {
           willChange: 'transform, opacity',
           transform: 'translate3d(0, 0, 0)' // Forzar aceleración por hardware
         }}
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
+        transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.5 }}
       >
-        <motion.h1 
+        <motion.h1
           className="text-4xl md:text-6xl lg:text-7xl mb-8 text-white"
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
           style={{
             fontFamily: '"Space Grotesk", "Manrope", "Inter", "Helvetica Neue", system-ui, sans-serif',
             fontWeight: '500',
@@ -150,17 +145,17 @@ const Hero = memo(() => {
         {/* Indicador de estado de IA - Reubicado debajo del botón */}
         <motion.div
           className="flex items-center justify-center gap-3 mt-8 text-sm font-medium"
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.3 }}
+          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 1.3 }}
         >
           <motion.div
             className="w-3 h-3 rounded-full"
             style={{
               background: 'linear-gradient(45deg, #3b82f6, #8b5cf6)'
             }}
-            animate={{ 
-              scale: [1, 1.3, 1], 
+            animate={reduceMotion ? undefined : {
+              scale: [1, 1.3, 1],
               opacity: [0.7, 1, 0.7],
               background: [
                 'linear-gradient(45deg, #3b82f6, #8b5cf6)',
@@ -187,44 +182,44 @@ const Hero = memo(() => {
         {/* Leyenda de categorías de eventos - Separada y más abajo */}
         <motion.div
           className="flex flex-wrap justify-center gap-6 mt-8 text-sm font-medium text-white/70"
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.6 }}
+          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 1.6 }}
         >
-          <motion.div 
+          <motion.div
             className="flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
             <motion.div
               className="w-2 h-2 bg-red-400 rounded-full"
-              animate={{ opacity: [0.6, 1, 0.6] }}
+              animate={reduceMotion ? undefined : { opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
             />
             <span>Conflicts</span>
           </motion.div>
           
-          <motion.div 
+          <motion.div
             className="flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
             <motion.div
               className="w-2 h-2 bg-blue-400 rounded-full"
-              animate={{ opacity: [0.6, 1, 0.6] }}
+              animate={reduceMotion ? undefined : { opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
             <span>Political Changes</span>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
             <motion.div
               className="w-2 h-2 bg-green-400 rounded-full"
-              animate={{ opacity: [0.6, 1, 0.6] }}
+              animate={reduceMotion ? undefined : { opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
             />
             <span>Innovation & Social</span>
@@ -234,14 +229,14 @@ const Hero = memo(() => {
         {/* Indicador de scroll */}
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0 }}
+          initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 2 }}
+          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 2 }}
         >
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
             <motion.div
               className="w-1 h-3 bg-white/60 rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
+              animate={reduceMotion ? undefined : { y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             />
           </div>

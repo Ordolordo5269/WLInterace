@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -65,7 +64,7 @@ const MobilityAI = () => {
               >
                 {/* Primary CTA */}
                 <motion.button
-                  className="px-8 py-4 bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-violet-500/50"
+                  className="px-8 py-4 bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-hidden focus:ring-4 focus:ring-violet-500/50"
                   whileHover={{ 
                     boxShadow: "0 0 30px rgba(139, 92, 246, 0.5)",
                     scale: 1.05 
@@ -79,7 +78,7 @@ const MobilityAI = () => {
                 {/* Secondary CTA */}
                 <motion.button
                   onClick={handleHowItWorksClick}
-                  className="px-8 py-4 border-2 border-gray-400 text-gray-300 font-semibold rounded-lg hover:border-violet-400 hover:text-violet-400 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-violet-500/50"
+                  className="px-8 py-4 border-2 border-gray-400 text-gray-300 font-semibold rounded-lg hover:border-violet-400 hover:text-violet-400 transition-all duration-300 focus:outline-hidden focus:ring-4 focus:ring-violet-500/50"
                   whileHover={{ 
                     borderColor: "rgb(139, 92, 246)",
                     color: "rgb(139, 92, 246)",
@@ -101,7 +100,7 @@ const MobilityAI = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <motion.div 
-                className="w-full max-w-lg h-96 bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 rounded-2xl flex items-center justify-center backdrop-blur-sm"
+                className="w-full max-w-lg h-96 bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 rounded-2xl flex items-center justify-center backdrop-blur-xs"
                 whileHover={{ scale: 1.02 }}
                 animate={{ 
                   y: [0, -12, 0],

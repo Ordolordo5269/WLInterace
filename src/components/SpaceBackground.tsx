@@ -5,7 +5,7 @@ interface SpaceBackgroundProps {
   variant?: 'stars' | 'animated';
 }
 
-const SpaceBackground: React.FC<SpaceBackgroundProps> = ({ variant = 'animated' }) => {
+const SpaceBackground: React.FC<SpaceBackgroundProps> = ({ variant: _variant = 'animated' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from './Navbar'
 
@@ -6,21 +6,6 @@ import Navbar from './Navbar'
 const Footer = lazy(() => import('./Footer'));
 
 function MobilityAI() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToHowItWorks = () => {
-    const element = document.getElementById('how-it-works');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="w-full">
       {/* Navbar */}
@@ -135,7 +120,7 @@ function MobilityAI() {
               className="order-2 lg:order-none"
             >
               <div className="relative mx-auto lg:ml-auto w-full max-w-xl">
-                <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm overflow-hidden shadow-2xl">
+                <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xs overflow-hidden shadow-2xl">
                   {/* Placeholder visual (video-ready) */}
                   <div className="aspect-[16/10] sm:aspect-[4/3] md:aspect-[16/9] w-full grid place-items-center">
                     <div className="text-center p-6">
@@ -242,7 +227,7 @@ function MobilityAI() {
             >
               <div className="relative h-[320px] sm:h-[380px] lg:h-[440px] w-full rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-white/10 overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_20px_60px_-20px_rgba(0,0,0,0.6)]">
                 {/* Badge: Coming Soon */}
-                <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 text-white/90 ring-1 ring-white/20 backdrop-blur-sm" aria-label="Content in development">
+                <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 text-white/90 ring-1 ring-white/20 backdrop-blur-xs" aria-label="Content in development">
                   <span aria-hidden>🛠️</span> Coming Soon
                 </span>
                 {/* Glow backdrop */}
@@ -299,7 +284,7 @@ function MobilityAI() {
             >
               <div className="relative h-[320px] sm:h-[380px] lg:h-[440px] w-full rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-white/10 overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_20px_60px_-20px_rgba(0,0,0,0.6)]">
                 {/* Badge: Coming Soon */}
-                <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 text-white/90 ring-1 ring-white/20 backdrop-blur-sm" aria-label="Content in development">
+                <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-white/10 text-white/90 ring-1 ring-white/20 backdrop-blur-xs" aria-label="Content in development">
                   <span aria-hidden>🛠️</span> Coming Soon
                 </span>
                 {/* Glow backdrop */}

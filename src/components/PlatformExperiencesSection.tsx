@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // Removed SpaceWavesBackground to avoid blue waves background flicker
 
@@ -40,41 +40,6 @@ const PlatformExperiencesSection = () => {
 
     return () => clearInterval(interval);
   }, [chatConversations.length]);
-
-  const webFeatures = [
-    {
-      title: "Interactive globe access",
-      description: "Facilitating clear and rapid visualization of essential data."
-    },
-    {
-      title: "Dynamic panel with immediate information",
-      description: "When selecting a country, information about economy, politics, society and culture is displayed."
-    },
-    {
-      title: "Premium option with AI integration",
-      description: "Would be the paid version:",
-      subFeatures: [
-        "Intelligent chatbot that answers specific questions.",
-        "Automatic generation of personalized summaries."
-      ]
-    }
-  ];
-
-  const webModules = [
-    {
-      name: "Mobility AI Web",
-      description: "Essential information about international mobility, migration routes, visa requirements, and global opportunities."
-    },
-    {
-      name: "WorldLore Investment AI Web",
-      description: "Visual dashboard for global investments, simplified recommendations, basic trend prediction."
-    }
-  ];
-
-  const userManagement = [
-    "Each user will have their own personal account.",
-    "Each user's progress will be saved, facilitating continuity between sessions."
-  ];
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden bg-black">
@@ -126,7 +91,7 @@ const PlatformExperiencesSection = () => {
 
         {/* Slide Navigation */}
         <div className="flex justify-center mb-12">
-          <div className="flex bg-slate-800/30 rounded-full p-1 backdrop-blur-sm border border-white/10">
+          <div className="flex bg-slate-800/30 rounded-full p-1 backdrop-blur-xs border border-white/10">
             <button
               onClick={() => setActiveSlide(0)}
               className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -168,7 +133,7 @@ const PlatformExperiencesSection = () => {
                   
                   {/* AI Intelligence Category */}
                   <motion.div
-                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-white/10"
+                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-xs rounded-xl p-6 border border-white/10"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
@@ -193,7 +158,7 @@ const PlatformExperiencesSection = () => {
 
                   {/* Data & Analytics Category */}
                   <motion.div
-                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-white/10"
+                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-xs rounded-xl p-6 border border-white/10"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
@@ -221,7 +186,7 @@ const PlatformExperiencesSection = () => {
 
                   {/* Navigation & Safety Category */}
                   <motion.div
-                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-white/10"
+                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-xs rounded-xl p-6 border border-white/10"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
@@ -246,7 +211,7 @@ const PlatformExperiencesSection = () => {
 
                   {/* World Model AI Category (replaced from Investment Intelligence) */}
                   <motion.div
-                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-white/10"
+                    className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-xs rounded-xl p-6 border border-white/10"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
@@ -456,7 +421,7 @@ const PlatformExperiencesSection = () => {
                     <div className="flex justify-between items-center px-5 py-2 text-white text-xs">
                       <span>9:41</span>
                       <div className="flex gap-1">
-                        <div className="w-3 h-1.5 bg-white rounded-sm"></div>
+                        <div className="w-3 h-1.5 bg-white rounded-xs"></div>
                       </div>
                     </div>
                     
@@ -507,7 +472,7 @@ const PlatformExperiencesSection = () => {
                       <div className="flex justify-between items-center px-2 py-3 text-white text-sm">
                         <span>9:41</span>
                         <div className="flex items-center gap-2">
-                          <div className="w-4 h-2 bg-white rounded-sm"></div>
+                          <div className="w-4 h-2 bg-white rounded-xs"></div>
                         </div>
                       </div>
                       

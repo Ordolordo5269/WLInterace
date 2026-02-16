@@ -26,7 +26,14 @@ root.render(
   </StrictMode>
 );
 
-// Hide loading screen after React has mounted and rendered
-setTimeout(() => {
-  hideLoadingScreen();
-}, 100); // Small delay to ensure everything is rendered
+// Hide loading screen after first paint for a fluid transition
+const showApp = () => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(hideLoadingScreen);
+  });
+};
+if (document.readyState === 'complete') {
+  showApp();
+} else {
+  window.addEventListener('load', showApp);
+}

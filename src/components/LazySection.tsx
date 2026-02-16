@@ -24,7 +24,7 @@ const LazySection: React.FC<LazySectionProps> = memo(({
   });
 
   return (
-    <div ref={elementRef as React.RefObject<HTMLDivElement>} className={className}>
+    <div ref={elementRef as React.RefObject<HTMLDivElement>} className={`section-container ${className}`.trim()}>
       {hasIntersected ? (
         <Suspense fallback={fallback}>
           {children}

@@ -1,9 +1,23 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+    hmr: {
+      overlay: false,
+    },
+  },
   build: {
     // Optimizaciones de rendimiento
     rollupOptions: {
@@ -17,22 +31,10 @@ export default defineConfig({
         }
       }
     },
-    // Optimizar el tamaño del bundle
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remover console.logs en producción
-        drop_debugger: true
-      }
-    },
+    // Optimizar el tamaño del bundle (esbuild por defecto; compatible con main app)
+    minify: 'esbuild',
     // Aumentar el límite de advertencia de chunk size
     chunkSizeWarningLimit: 1000
-  },
-  // Optimizaciones de desarrollo
-  server: {
-    hmr: {
-      overlay: false // Desactivar overlay de errores para mejor rendimiento
-    }
   },
   // Optimizar dependencias
   optimizeDeps: {

@@ -1,4 +1,4 @@
-import { memo, useMemo, useState, useEffect, useRef } from 'react';
+import { memo, useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type ScenarioKey = 'spainRent';
@@ -153,7 +153,7 @@ const ScenarioSimulator = memo(() => {
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ type: 'spring', stiffness: 240, damping: 26, mass: 0.7 }}
                       layout
-                      className="max-w-[85%] rounded-2xl px-3 py-1.5 text-[12px] bg-white/8 border border-white/20 backdrop-blur-sm text-white/90"
+                      className="max-w-[85%] rounded-2xl px-3 py-1.5 text-[12px] bg-white/8 border border-white/20 backdrop-blur-xs text-white/90"
                     >
                       {curMsg}
                     </motion.div>
@@ -191,7 +191,7 @@ const ScenarioSimulator = memo(() => {
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ type: 'spring', stiffness: 240, damping: 26, mass: 0.7 }}
                       layout
-                      className="max-w-[85%] rounded-2xl px-3 py-1.5 text-[12px] bg-white/8 border border-white/20 backdrop-blur-sm text-white/90"
+                      className="max-w-[85%] rounded-2xl px-3 py-1.5 text-[12px] bg-white/8 border border-white/20 backdrop-blur-xs text-white/90"
                     >
                       {simMsg}
                     </motion.div>

@@ -10,8 +10,9 @@ export default function Navbar() {
   };
 
   return (
-    <motion.nav 
+    <motion.nav
       className="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-md font-space"
+      style={{ contain: 'layout style', transform: 'translateZ(0)' }}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}

@@ -271,6 +271,13 @@ const LazyCanvas = memo(({ children, ...props }: any) => (
   </Canvas>
 ));
 
+const WL_MAP_URL = (() => {
+  const base = import.meta.env.VITE_WL_APP_URL;
+  if (base) return `${String(base).replace(/\/$/, '')}/map`;
+  if (typeof window !== 'undefined' && window.location.port === '5174') return 'http://localhost:5173/map';
+  return '/map';
+})();
+
 // Memoize AIScene to prevent unnecessary re-renders
 const MemoizedAIScene = memo(({ inView, phase }: { inView: boolean; phase: number }) => <AIScene inView={inView} phase={phase} />);
 
@@ -281,12 +288,6 @@ const EducationalSection = () => {
   const handleNext = useCallback(() => {
     setPhase((prev) => Math.min(prev + 1, totalPhases - 1));
   }, [totalPhases]);
-
-  const handleEnterWorldLore = useCallback(() => {
-    // Aquí puedes añadir la lógica para navegar a la aplicación principal
-    console.log('Entering WorldLore...');
-    // Por ejemplo: window.location.href = '/dashboard' o router.push('/dashboard')
-  }, []);
 
   const handleBack = useCallback(() => {
     setPhase((prev) => Math.max(prev - 1, 0));
@@ -456,12 +457,12 @@ const EducationalSection = () => {
                       Next
                     </button>
                   ) : (
-                    <button
-                      onClick={handleEnterWorldLore}
-                      className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-light text-lg rounded-full hover:shadow-[0_0_20px_rgba(16,185,129,0.7)] transition-all duration-300"
+                    <a
+                      href={WL_MAP_URL}
+                      className="inline-block px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-light text-lg rounded-full hover:shadow-[0_0_20px_rgba(16,185,129,0.7)] transition-all duration-300 no-underline"
                     >
                       Enter WorldLore
-                    </button>
+                    </a>
                   )}
                 </div>
               </motion.div>

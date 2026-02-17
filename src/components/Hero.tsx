@@ -2,6 +2,13 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, memo, useCallback, useMemo } from 'react';
 import ParticleGlobeWithLegend from './ParticleGlobeWithLegend';
 
+const WL_MAP_URL = (() => {
+  const base = import.meta.env.VITE_WL_APP_URL;
+  if (base) return `${String(base).replace(/\/$/, '')}/map`;
+  if (typeof window !== 'undefined' && window.location.port === '5174') return 'http://localhost:5173/map';
+  return '/map';
+})();
+
 const Hero = memo(() => {
   const reduceMotion = useReducedMotion();
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -117,8 +124,9 @@ const Hero = memo(() => {
           The Smartest Way To Understand The World
         </motion.p>
         
-        <motion.button 
-          className="px-10 py-4 bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 text-white text-lg font-semibold rounded-lg shadow-2xl border border-purple-500/30 relative overflow-hidden transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-purple-600"
+        <motion.a
+          href={WL_MAP_URL}
+          className="inline-block px-10 py-4 bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 text-white text-lg font-semibold rounded-lg shadow-2xl border border-purple-500/30 relative overflow-hidden transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-purple-600 no-underline"
           initial={false}
           style={{
             boxShadow: '0 8px 25px rgba(147, 51, 234, 0.4), 0 0 15px rgba(59, 130, 246, 0.2)',
@@ -140,7 +148,7 @@ const Hero = memo(() => {
             whileHover={{ opacity: 1 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           />
-        </motion.button>
+        </motion.a>
         
         {/* Indicador de estado de IA - Reubicado debajo del botón */}
         <motion.div

@@ -130,7 +130,8 @@ const Hero = memo(() => {
           initial={false}
           style={{
             boxShadow: '0 8px 25px rgba(147, 51, 234, 0.4), 0 0 15px rgba(59, 130, 246, 0.2)',
-            willChange: 'transform'
+            willChange: 'transform',
+            textDecoration: 'none'
           }}
           whileHover={{ 
             scale: 1.05,

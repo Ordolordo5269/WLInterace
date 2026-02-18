@@ -7,6 +7,13 @@ import { Environment } from '@react-three/drei';
 import { useSpring, animated } from '@react-spring/three';
 import * as THREE from 'three';
 
+const WL_MAP_URL = (() => {
+  const base = import.meta.env.VITE_WL_APP_URL;
+  if (base) return `${String(base).replace(/\/$/, '')}/map`;
+  if (typeof window !== 'undefined' && window.location.port === '5174') return 'http://localhost:5173/map';
+  return '/map';
+})();
+
 
 
 // Continental Particles Component - Optimized with memo

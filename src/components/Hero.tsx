@@ -3,9 +3,27 @@ import { useEffect, useRef, memo, useCallback, useMemo } from 'react';
 import ParticleGlobeWithLegend from './ParticleGlobeWithLegend';
 
 const WL_MAP_URL = (() => {
+  // 1. Prioridad: Variable de entorno explícita (recomendado para producción)
   const base = import.meta.env.VITE_WL_APP_URL;
   if (base) return `${String(base).replace(/\/$/, '')}/map`;
-  if (typeof window !== 'undefined' && window.location.port === '5174') return 'http://localhost:5173/map';
+  
+  // 2. Detección automática en desarrollo
+  if (typeof window !== 'undefined' && import.meta.env.DEV) {
+    const { protocol, hostname, port } = window.location;
+    
+    // Si la landing está en puerto 5174, la app principal está en 5173
+    if (port === '5174') {
+      return 'http://localhost:5173/map';
+    }
+    
+    // Si está en desarrollo pero en otro puerto, construir URL basada en el origen actual
+    // Asumiendo que la app principal está en el mismo host pero puerto 5173
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return `${protocol}//${hostname}:5173/map`;
+    }
+  }
+  
+  // 3. Producción: usar ruta relativa (asume que están en el mismo dominio)
   return '/map';
 })();
 
